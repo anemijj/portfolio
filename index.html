@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jimena Haddad Gagliani — Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio minimalista de Jimena Haddad Gagliani. Proyectos editorial, 3D y web."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <h1 class="site-title">Jimena Haddad Gagliani</h1>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="#proyectos">proyectos</a>
+          <a href="#contacto">contacto</a>
+          <a href="#sobre-mi">sobre mi</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="layout">
+      <aside class="filters" aria-label="Filtros de proyectos">
+        <div class="filter-list" role="list">
+          <button class="filter-btn" type="button" data-filter="editorial">
+            editorial
+          </button>
+          <button class="filter-btn" type="button" data-filter="3d">3d</button>
+          <button class="filter-btn" type="button" data-filter="web">web</button>
+        </div>
+        <button class="clear-filter" type="button" data-clear>
+          limpiar filtro
+        </button>
+      </aside>
+
+      <section id="proyectos" class="gallery" aria-label="Galería de proyectos">
+        <div class="gallery-header">
+          <p class="hint" aria-live="polite">
+            Elegí un filtro para resaltar una categoría.
+          </p>
+        </div>
+
+        <div id="galleryGrid" class="gallery-grid" role="list"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <section id="sobre-mi" class="footer-section" aria-label="Sobre mí">
+        <h2 class="footer-title">sobre mi</h2>
+        <p class="footer-text">
+          Diseñadora con foco en sistemas visuales, detalle y claridad. Este
+          espacio está pensado para crecer con proyectos, proceso y links.
+        </p>
+      </section>
+
+      <section id="contacto" class="footer-section" aria-label="Contacto">
+        <h2 class="footer-title">contacto</h2>
+        <p class="footer-text">
+          <a href="mailto:jimena@example.com">jimena@example.com</a>
+        </p>
+      </section>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
