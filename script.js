@@ -100,6 +100,11 @@ if (page === "home" && grid) {
     if (!item) return;
 
     const name = item.getAttribute("data-project");
+    const index = Number(item.getAttribute("data-index") || "-1");
+    if (index === 0) {
+      window.location.href = "/project.html";
+      return;
+    }
     console.log("Project clicked:", name);
     // Future: location.href = `/projects/${slugify(name)}.html`
   });
@@ -122,17 +127,18 @@ function renderGallery(items) {
   grid.innerHTML = "";
 
   const frag = document.createDocumentFragment();
-  items.forEach((p) => frag.appendChild(projectCard(p)));
+  items.forEach((p, idx) => frag.appendChild(projectCard(p, idx)));
   grid.appendChild(frag);
 }
 
-function projectCard(project) {
+function projectCard(project, index) {
   const button = document.createElement("button");
   button.type = "button";
   button.className = "project";
   button.setAttribute("role", "listitem");
   button.setAttribute("data-project", project.name);
   button.setAttribute("data-category", project.category);
+  button.setAttribute("data-index", String(index));
   button.setAttribute("aria-label", `${project.name} (${project.category})`);
 
   const img = document.createElement("img");

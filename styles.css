@@ -82,7 +82,7 @@ a:hover {
 
 .header-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: 16px;
 }
@@ -95,22 +95,22 @@ a:hover {
 }
 
 .help-btn {
-  font-family: var(--subtitle-font);
-  font-size: 18px;
+  font-family: var(--title-font);
+  font-size: clamp(28px, 3vw, 36px);
   line-height: 1;
-  padding: 8px 10px;
-  border-radius: 999px;
+  padding: 0;
+  border-radius: 8px;
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, 0.8);
+  border: none;
+  color: rgba(0, 0, 0, 0.95);
   cursor: pointer;
-  transition: opacity 180ms var(--ease), border-color 180ms var(--ease);
+  transition: opacity 180ms var(--ease), transform 180ms var(--ease);
 }
 
 .help-btn:hover {
   opacity: 0.65;
   text-decoration: none;
-  border-color: rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
 }
 
 .help-btn:focus-visible {
