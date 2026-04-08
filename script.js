@@ -5,6 +5,8 @@
  * - Clicking a project logs its name (easy to swap for navigation later)
  */
 
+const page = document.body?.dataset?.page || "home";
+
 const projects = [
   {
     name: "Revista — Sistema Editorial",
@@ -75,39 +77,46 @@ const filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
 const clearBtn = document.querySelector("[data-clear]");
 const hint = document.querySelector(".hint");
 
-renderGallery(projects);
-syncFilterUi();
+if (page === "home" && grid) {
+  renderGallery(projects);
+  syncFilterUi();
 
-filterButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const next = btn.dataset.filter;
-    // Toggle behavior: clicking the active filter clears it.
-    activeFilter = activeFilter === next ? null : next;
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const next = btn.dataset.filter;
+      // Toggle behavior: clicking the active filter clears it.
+      activeFilter = activeFilter === next ? null : next;
+      syncFilterUi();
+    });
+  });
+
+  clearBtn?.addEventListener("click", () => {
+    activeFilter = null;
     syncFilterUi();
   });
-});
 
-clearBtn?.addEventListener("click", () => {
-  activeFilter = null;
-  syncFilterUi();
-});
+  grid.addEventListener("click", (event) => {
+    const item = event.target.closest("[data-project]");
+    if (!item) return;
 
-grid.addEventListener("click", (event) => {
-  const item = event.target.closest("[data-project]");
-  if (!item) return;
+    const name = item.getAttribute("data-project");
+    console.log("Project clicked:", name);
+    // Future: location.href = `/projects/${slugify(name)}.html`
+  });
 
-  const name = item.getAttribute("data-project");
-  console.log("Project clicked:", name);
-  // Future: location.href = `/projects/${slugify(name)}.html`
-});
+  grid.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const item = event.target.closest("[data-project]");
+    if (!item) return;
+    event.preventDefault();
+    item.click();
+  });
+}
 
-grid.addEventListener("keydown", (event) => {
-  if (event.key !== "Enter" && event.key !== " ") return;
-  const item = event.target.closest("[data-project]");
-  if (!item) return;
-  event.preventDefault();
-  item.click();
-});
+if (page === "project") {
+  initInteractiveMap();
+  initModal();
+}
 
 function renderGallery(items) {
   grid.innerHTML = "";
@@ -183,4 +192,104 @@ function escapeXml(text) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&apos;");
+}
+
+function initInteractiveMap() {
+  const stage = document.getElementById("mapStage");
+  if (!stage) return;
+
+  // Circle data: positions are percentages relative to the image container.
+  const points = [
+    {
+      id: "entrada",
+      x: 18,
+      y: 32,
+      color: "#f6b6d8", // pastel pink
+      title: "Entrada",
+      description:
+        "Punto de llegada: compresión → apertura. Marca el ritmo inicial y el primer cambio de escala.",
+    },
+    {
+      id: "nucleo",
+      x: 56,
+      y: 28,
+      color: "#a7d8ff", // pastel blue
+      title: "Núcleo",
+      description:
+        "Centro operativo: organiza recorridos y vistas cruzadas. Acá se concentran decisiones de orientación.",
+    },
+    {
+      id: "umbral",
+      x: 74,
+      y: 58,
+      color: "#fde68a", // pastel yellow
+      title: "Umbral",
+      description:
+        "Transición: cambia la atmósfera. Luz, material y sonido acompañan el pasaje entre zonas.",
+    },
+  ];
+
+  points.forEach((p) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "marker";
+    btn.style.left = `${p.x}%`;
+    btn.style.top = `${p.y}%`;
+    btn.dataset.markerId = p.id;
+    btn.dataset.markerColor = p.color;
+    btn.dataset.modalTitle = p.title;
+    btn.dataset.modalBody = p.description;
+    btn.setAttribute("aria-label", `Abrir detalle: ${p.title}`);
+
+    btn.addEventListener("mouseenter", () => {
+      btn.style.backgroundColor = p.color;
+    });
+    btn.addEventListener("mouseleave", () => {
+      btn.style.backgroundColor = "#000";
+    });
+    btn.addEventListener("click", () => {
+      openModal({ title: p.title, body: p.description });
+    });
+
+    stage.appendChild(btn);
+  });
+}
+
+let modalEls = null;
+
+function initModal() {
+  const modal = document.getElementById("modal");
+  if (!modal) return;
+
+  const titleEl = document.getElementById("modalTitle");
+  const bodyEl = document.getElementById("modalBody");
+  const closeEls = Array.from(modal.querySelectorAll("[data-modal-close]"));
+
+  modalEls = { modal, titleEl, bodyEl };
+
+  closeEls.forEach((el) =>
+    el.addEventListener("click", () => {
+      closeModal();
+    })
+  );
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+}
+
+function openModal({ title, body }) {
+  if (!modalEls) return;
+  const { modal, titleEl, bodyEl } = modalEls;
+
+  if (titleEl) titleEl.textContent = title;
+  if (bodyEl) bodyEl.textContent = body;
+
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeModal() {
+  if (!modalEls) return;
+  const { modal } = modalEls;
+  modal.setAttribute("aria-hidden", "true");
 }

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto — Jimena Haddad Gagliani</title>
+    <meta name="description" content="Project case study." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="project">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-top">
+          <h1 class="site-title">Jimena Haddad Gagliani</h1>
+          <a class="help-btn" href="/random.html" aria-label="Abrir página random">
+            ?
+          </a>
+        </div>
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="/index.html#proyectos">proyectos</a>
+          <a href="/index.html#contacto">contacto</a>
+          <a href="/index.html#sobre-mi">sobre mi</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="case">
+      <section class="hero" aria-label="Hero">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <!-- Placeholder source. Swap for your real video later. -->
+          <source src="assets/hero.mp4" type="video/mp4" />
+        </video>
+      </section>
+
+      <section class="case-section" aria-label="1. Espacio">
+        <header class="section-header">
+          <h2 class="section-title">1. ESPACIO</h2>
+        </header>
+
+        <div class="two-col">
+          <p>
+            Texto placeholder. Acá va la descripción del espacio: decisiones,
+            escala, circulación, materialidad, y cómo se construye la
+            experiencia.
+          </p>
+          <p>
+            Texto placeholder. Acá podés sumar contexto: constraints, objetivos,
+            referencias, y resultados medibles o cualitativos.
+          </p>
+        </div>
+
+        <figure class="map">
+          <div class="map-stage" id="mapStage">
+            <img
+              class="map-img"
+              alt="Diagrama de espacio"
+              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221600%22%20height%3D%22900%22%20viewBox%3D%220%200%201600%20900%22%3E%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M120%20140h540v260H120z%20M760%20140h720v560H760z%20M120%20470h540v230H120z%22%20fill%3D%22none%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.15)%22%20stroke-width%3D%226%22/%3E%3Cpath%20d%3D%22M220%20240h340M220%20310h260M850%20240h520M850%20320h420M850%20410h560%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22/%3E%3Ctext%20x%3D%22120%22%20y%3D%22820%22%20font-size%3D%2240%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EMapa%20%2F%20Diagrama%20(placeholder)%3C/text%3E%3C/svg%3E"
+            />
+            <!-- Markers get injected here by JS -->
+          </div>
+          <figcaption class="caption">
+            Puntos interactivos: hover para color, click para abrir detalle.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="case-section" aria-label="2. Web">
+        <header class="section-header">
+          <h2 class="section-title">2. WEB</h2>
+        </header>
+
+        <div class="two-col">
+          <p>
+            Texto placeholder. Describí el sistema, arquitectura, navegación y
+            los componentes clave.
+          </p>
+          <p>
+            Texto placeholder. Contá decisiones de diseño, accesibilidad y
+            performance.
+          </p>
+        </div>
+
+        <div class="embed">
+          <video
+            class="embed-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source src="assets/web-demo.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section class="case-section" aria-label="3. Revista">
+        <header class="section-header">
+          <h2 class="section-title">3. REVISTA</h2>
+        </header>
+
+        <p class="lead">
+          Scroll horizontal tipo lectura: imágenes en tira continua (cada imagen
+          simula media página).
+        </p>
+
+        <section class="magazine" aria-label="Revista horizontal">
+          <div class="mag-strip" role="list">
+            <img
+              role="listitem"
+              class="mag-page"
+              alt="Página 1"
+              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%221200%22%20viewBox%3D%220%200%20900%201200%22%3E%3Crect%20width%3D%22900%22%20height%3D%221200%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M90%20130h720v380H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.03)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%224%22/%3E%3Ctext%20x%3D%2290%22%20y%3D%22860%22%20font-size%3D%2244%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EP%C3%A1gina%201%3C/text%3E%3C/svg%3E"
+            />
+            <img
+              role="listitem"
+              class="mag-page"
+              alt="Página 2"
+              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%221200%22%20viewBox%3D%220%200%20900%201200%22%3E%3Crect%20width%3D%22900%22%20height%3D%221200%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M90%20170h560v300H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.03)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%224%22/%3E%3Cpath%20d%3D%22M90%20540h720v240H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.02)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.08)%22%20stroke-width%3D%224%22/%3E%3Ctext%20x%3D%2290%22%20y%3D%22860%22%20font-size%3D%2244%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EP%C3%A1gina%202%3C/text%3E%3C/svg%3E"
+            />
+            <img
+              role="listitem"
+              class="mag-page"
+              alt="Página 3"
+              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%221200%22%20viewBox%3D%220%200%20900%201200%22%3E%3Crect%20width%3D%22900%22%20height%3D%221200%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M90%20150h720v520H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.03)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%224%22/%3E%3Ctext%20x%3D%2290%22%20y%3D%22860%22%20font-size%3D%2244%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EP%C3%A1gina%203%3C/text%3E%3C/svg%3E"
+            />
+            <img
+              role="listitem"
+              class="mag-page"
+              alt="Página 4"
+              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%221200%22%20viewBox%3D%220%200%20900%201200%22%3E%3Crect%20width%3D%22900%22%20height%3D%221200%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M90%20160h520v300H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.03)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%224%22/%3E%3Cpath%20d%3D%22M90%20520h720v280H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.02)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.08)%22%20stroke-width%3D%224%22/%3E%3Ctext%20x%3D%2290%22%20y%3D%22860%22%20font-size%3D%2244%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EP%C3%A1gina%204%3C/text%3E%3C/svg%3E"
+            />
+          </div>
+        </section>
+      </section>
+
+      <!-- Reusable modal -->
+      <div class="modal" id="modal" aria-hidden="true">
+        <div class="modal-overlay" data-modal-close></div>
+        <div
+          class="modal-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modalTitle"
+          aria-describedby="modalBody"
+        >
+          <button class="modal-close" type="button" data-modal-close>
+            cerrar
+          </button>
+          <h2 class="modal-title" id="modalTitle"></h2>
+          <p class="modal-body" id="modalBody"></p>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
