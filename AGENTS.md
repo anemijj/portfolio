@@ -1,5 +1,3 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+# Project
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+Este repositorio es un **sitio estático** (HTML, CSS, JS en la raíz): `index.html`, `project.html`, `random.html`, `styles.css`, `script.js`. No usa Next.js ni React.

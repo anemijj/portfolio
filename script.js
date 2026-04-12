@@ -102,7 +102,7 @@ if (page === "home" && grid) {
     const name = item.getAttribute("data-project");
     const index = Number(item.getAttribute("data-index") || "-1");
     if (index === 0) {
-      window.location.href = "/project.html";
+      window.location.href = "project.html";
       return;
     }
     console.log("Project clicked:", name);
