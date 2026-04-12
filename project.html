@@ -20,22 +20,29 @@
 
     <header class="site-header">
       <div class="header-inner">
-        <div class="header-top">
-          <a class="help-btn" href="random.html" aria-label="Abrir página random">
-            ?
-          </a>
-          <h1 class="site-title">Jimena Haddad Gagliani</h1>
+        <div class="header-row">
+          <div class="header-top">
+            <a class="help-btn" href="random.html" aria-label="Abrir página random">
+              ?
+            </a>
+            <h1 class="site-title">Jimena Haddad Gagliani</h1>
+          </div>
+          <nav class="site-nav" aria-label="Navegación principal">
+            <a href="index.html#proyectos">proyectos</a>
+            <a href="index.html#contacto">contacto</a>
+            <a href="index.html#sobre-mi">sobre mi</a>
+          </nav>
         </div>
-        <nav class="site-nav" aria-label="Navegación principal">
-          <a href="index.html#proyectos">proyectos</a>
-          <a href="index.html#contacto">contacto</a>
-          <a href="index.html#sobre-mi">sobre mi</a>
+        <nav class="header-jump" aria-label="En esta página">
+          <a href="#sec-espacio" class="header-jump-btn">espacio</a>
+          <a href="#sec-web" class="header-jump-btn">web</a>
+          <a href="#sec-revista" class="header-jump-btn">revista</a>
         </nav>
       </div>
     </header>
 
-    <main id="main" class="case">
-      <section class="hero" aria-label="Hero">
+    <main id="main" class="project-page">
+      <section class="hero hero--fullbleed" aria-label="Hero — landing">
         <video
           class="hero-video"
           autoplay
@@ -44,25 +51,22 @@
           playsinline
           preload="metadata"
         >
-          <!-- Placeholder source. Swap for your real video later. -->
-          <source src="assets/hero.mp4" type="video/mp4" />
+          <source src="materia/LANDING.mp4" type="video/mp4" />
         </video>
       </section>
 
-      <section class="case-section" aria-label="1. Espacio">
+      <div class="case">
+        <section id="sec-espacio" class="case-section" aria-label="1. Espacio">
         <header class="section-header">
           <h2 class="section-title">1. ESPACIO</h2>
         </header>
 
         <div class="two-col">
           <p>
-            Texto placeholder. Acá va la descripción del espacio: decisiones,
-            escala, circulación, materialidad, y cómo se construye la
-            experiencia.
+            (RE) SIGNIFICAR, UTILIZAR, VITALIZAR
           </p>
           <p>
-            Texto placeholder. Acá podés sumar contexto: constraints, objetivos,
-            referencias, y resultados medibles o cualitativos.
+            Frente a la falta de espacios diseñados para la comunidad cinéfila, El Público propone reutilizar la Galería del Este, actualmente en desuso, para resignificar su relevancia cultural y revitalizar sus pasillos, ofreciendo un punto de encuentro por y para el cine.
           </p>
         </div>
 
@@ -81,23 +85,21 @@
         </figure>
       </section>
 
-      <section class="case-section" aria-label="2. Web">
+        <section id="sec-web" class="case-section" aria-label="2. Web">
         <header class="section-header">
           <h2 class="section-title">2. WEB</h2>
         </header>
 
         <div class="two-col">
           <p>
-            Texto placeholder. Describí el sistema, arquitectura, navegación y
-            los componentes clave.
+            La web permite integrar a El Público y la galería con la comunidad desde cualquier lugar y momento. Los usuarios intervienen pudiendo compartir reseñas o votando qué películas quieren ver en los próximos días.
           </p>
           <p>
-            Texto placeholder. Contá decisiones de diseño, accesibilidad y
-            performance.
+            Además, es posible armarse un perfil con listas de películas personalizadas creando un espacio de pertenencia virtual dentro de la comunidad de El Público.
           </p>
         </div>
 
-        <div class="embed">
+        <div class="embed embed--fullbleed">
           <video
             class="embed-video"
             autoplay
@@ -106,52 +108,27 @@
             playsinline
             preload="metadata"
           >
-            <source src="assets/web-demo.mp4" type="video/mp4" />
+            <source src="materia/web%20FINALE.mp4" type="video/mp4" />
           </video>
         </div>
       </section>
 
-      <section class="case-section" aria-label="3. Revista">
+        <section id="sec-revista" class="case-section" aria-label="3. Revista">
         <header class="section-header">
           <h2 class="section-title">3. REVISTA</h2>
         </header>
 
         <p class="lead">
-          Scroll horizontal tipo lectura: imágenes en tira continua (cada imagen
-          simula media página).
+          JPG en <code>materia/revistajpg/</code>: deslizá horizontalmente. Primera y
+          última lámina solas; el resto, dos páginas por vista.
         </p>
 
-        <section class="magazine" aria-label="Revista horizontal">
-          <div class="mag-strip" role="list">
-            <img
-              role="listitem"
-              class="mag-page"
-              alt="Página 1"
-              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%221200%22%20viewBox%3D%220%200%20900%201200%22%3E%3Crect%20width%3D%22900%22%20height%3D%221200%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M90%20130h720v380H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.03)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%224%22/%3E%3Ctext%20x%3D%2290%22%20y%3D%22860%22%20font-size%3D%2244%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EP%C3%A1gina%201%3C/text%3E%3C/svg%3E"
-            />
-            <img
-              role="listitem"
-              class="mag-page"
-              alt="Página 2"
-              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%221200%22%20viewBox%3D%220%200%20900%201200%22%3E%3Crect%20width%3D%22900%22%20height%3D%221200%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M90%20170h560v300H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.03)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%224%22/%3E%3Cpath%20d%3D%22M90%20540h720v240H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.02)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.08)%22%20stroke-width%3D%224%22/%3E%3Ctext%20x%3D%2290%22%20y%3D%22860%22%20font-size%3D%2244%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EP%C3%A1gina%202%3C/text%3E%3C/svg%3E"
-            />
-            <img
-              role="listitem"
-              class="mag-page"
-              alt="Página 3"
-              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%221200%22%20viewBox%3D%220%200%20900%201200%22%3E%3Crect%20width%3D%22900%22%20height%3D%221200%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M90%20150h720v520H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.03)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%224%22/%3E%3Ctext%20x%3D%2290%22%20y%3D%22860%22%20font-size%3D%2244%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EP%C3%A1gina%203%3C/text%3E%3C/svg%3E"
-            />
-            <img
-              role="listitem"
-              class="mag-page"
-              alt="Página 4"
-              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22900%22%20height%3D%221200%22%20viewBox%3D%220%200%20900%201200%22%3E%3Crect%20width%3D%22900%22%20height%3D%221200%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M90%20160h520v300H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.03)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%224%22/%3E%3Cpath%20d%3D%22M90%20520h720v280H90z%22%20fill%3D%22rgba(0%2C0%2C0%2C0.02)%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.08)%22%20stroke-width%3D%224%22/%3E%3Ctext%20x%3D%2290%22%20y%3D%22860%22%20font-size%3D%2244%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EP%C3%A1gina%204%3C/text%3E%3C/svg%3E"
-            />
-          </div>
+        <div class="magazine magazine--fullbleed" aria-label="Revista">
+          <div id="magStrip" class="mag-strip mag-strip--pdf" tabindex="0"></div>
+        </div>
         </section>
-      </section>
+      </div>
 
-      <!-- Reusable modal -->
       <div class="modal" id="modal" aria-hidden="true">
         <div class="modal-overlay" data-modal-close></div>
         <div

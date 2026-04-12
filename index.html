@@ -21,25 +21,30 @@
   <body>
     <a class="skip-link" href="#main">Saltar al contenido</a>
 
-    <header class="site-header">
+    <header class="site-header site-header--home">
       <div class="header-inner">
-        <div class="header-top">
-          <a class="help-btn" href="random.html" aria-label="Abrir página random">
-            ?
-          </a>
-          <h1 class="site-title">Jimena Haddad Gagliani</h1>
+        <div class="header-row">
+          <div class="header-top">
+            <a class="help-btn" href="random.html" aria-label="Abrir página random">
+              ?
+            </a>
+            <h1 class="site-title">Jimena Haddad Gagliani</h1>
+          </div>
+          <nav class="site-nav" aria-label="Navegación principal">
+            <a href="#proyectos">proyectos</a>
+            <a href="#contacto">contacto</a>
+            <a href="#sobre-mi">sobre mi</a>
+          </nav>
         </div>
-        <nav class="site-nav" aria-label="Navegación principal">
-          <a href="#proyectos">proyectos</a>
-          <a href="#contacto">contacto</a>
-          <a href="#sobre-mi">sobre mi</a>
-        </nav>
       </div>
     </header>
 
     <main id="main" class="layout">
       <aside class="filters" aria-label="Filtros de proyectos">
         <div class="filter-list" role="list">
+          <button class="filter-btn" type="button" data-filter="reciente">
+            reciente
+          </button>
           <button class="filter-btn" type="button" data-filter="editorial">
             editorial
           </button>
