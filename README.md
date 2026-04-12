@@ -17,7 +17,21 @@ Abrí `http://localhost:5173/index.html`.
 
 ## GitHub Pages
 
-En el repo: **Settings → Pages → Build and deployment → Deploy from a branch**, elegí la rama (por ejemplo `main`) y carpeta **`/` (root)**. La URL será algo como `https://<usuario>.github.io/<repo>/`.
+Elegí **solo una** de estas opciones (si mezclás mal la fuente, suele “fallar” o no publicar):
+
+### Opción A — Deploy from a branch (simple)
+
+**Settings → Pages → Build and deployment → Deploy from a branch** → rama `main` → carpeta **`/` (root)**.
+
+En la raíz hay un archivo **`.nojekyll`** para que GitHub no intente procesar el sitio con Jekyll (evita errores raros con HTML estático).
+
+### Opción B — GitHub Actions
+
+**Settings → Pages → Source: GitHub Actions**. El repo incluye `.github/workflows/pages.yml`, que sube la raíz del repo como sitio estático.
+
+Si antes tenías la fuente en Actions **sin** workflow, el deploy fallaba: con este archivo debería pasar el build.
+
+La URL suele ser `https://<usuario>.github.io/<repo>/` (proyecto) o `https://<usuario>.github.io/` (repo llamado `<usuario>.github.io`).
 
 ## Vercel
 
