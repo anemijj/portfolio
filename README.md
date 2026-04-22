@@ -33,6 +33,14 @@ Si antes tenías la fuente en Actions **sin** workflow, el deploy fallaba: con e
 
 La URL suele ser `https://<usuario>.github.io/<repo>/` (proyecto) o `https://<usuario>.github.io/` (repo llamado `<usuario>.github.io`).
 
+### Si ves “404 File not found” (no es un bloqueo)
+
+- **Repo normal** (por ejemplo `portfolio`): la home es  
+  `https://<usuario>.github.io/portfolio/` o `.../portfolio/index.html`.  
+  Si entrás solo a `https://<usuario>.github.io/` sin el nombre del repo, GitHub muestra 404.
+- **Nombres de archivo**: las rutas distinguen mayúsculas/minúsculas (`Entorno.html` ≠ `entorno.html`).
+- Hay un **`404.html`** en la raíz con un enlace al inicio del sitio (útil cuando la URL apunta a un archivo que no existe).
+
 ## Vercel
 
 En el proyecto de Vercel, framework **Other** (sin build) o dejá el preset que detecte archivos estáticos en la raíz.
