@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# media pesada
+materia/**/*.mov
+materia/**/*.mp4
+materia/**/*.bip
+materia/**/*.exr

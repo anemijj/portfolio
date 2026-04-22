@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>entorno inmersivo — Jimena Haddad Gagliani</title>
+    <meta name="description" content="Entorno inmersivo — video 360 equirectangular." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="entorno-inmersivo">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-row header-row--twocol">
+          <div class="header-top">
+            <a class="help-btn" href="random.html" aria-label="Abrir página random">
+              ?
+            </a>
+            <h1 class="site-title">
+              <a class="site-title-link" href="index.html">Jimena Haddad Gagliani</a>
+            </h1>
+          </div>
+          <span class="header-project-name">entorno inmersivo</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="project-page">
+      <div class="case case--vr360">
+        <p class="vr360-hint">
+          Vista 360 embebida desde YouTube (mismo material que <code>materia/archivos faltantes pc/entorno.mp4</code>).
+          En desktop podés arrastrar para mirar alrededor y en celular usar movimiento del equipo.
+        </p>
+        <div class="figma-embed" aria-label="Preview YouTube 360">
+          <iframe
+            src="https://www.youtube.com/embed/otYV-RaQyyU?rel=0&modestbranding=1"
+            title="Entorno inmersivo 360"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p class="vr360-embed-note">
+          Si ves el error 153 en vista local (<code>file://</code>), abrilo directo en
+          <a href="https://www.youtube.com/watch?v=otYV-RaQyyU" target="_blank" rel="noopener noreferrer"
+            >YouTube 360</a
+          >
+          o corré el sitio con servidor local.
+        </p>
+      </div>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

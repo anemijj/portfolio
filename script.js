@@ -15,7 +15,7 @@ function iconPath(fileName) {
 }
 
 /**
- * Un ítem por cada PNG en `materia/iconos/` (11 archivos).
+ * Un ítem por cada PNG en `materia/iconos/`.
  * El primero (índice 0) abre `project.html` al hacer click.
  */
 const projects = [
@@ -32,13 +32,13 @@ const projects = [
     image: iconPath("Recurso 50 1.png"),
   },
   {
-    name: "Pieza 3D",
+    name: "S4 G8",
     category: "3d",
     recent: true,
     image: iconPath("6c8f988eb13b2eae0e430839e03248b4 1.png"),
   },
   {
-    name: "Trabajo",
+    name: "la dolce vita",
     category: "web",
     recent: true,
     image: iconPath("trabajo 2-07 1.png"),
@@ -68,19 +68,13 @@ const projects = [
     image: iconPath("d36674ac0f3fa9c16b7fc9557c99572d 1.png"),
   },
   {
-    name: "Tapa voladora",
+    name: "vuelta griega",
     category: "editorial",
     recent: false,
     image: iconPath("tapa voladora.19 1.png"),
   },
   {
-    name: "Star",
-    category: "web",
-    recent: false,
-    image: iconPath("Star 1.png"),
-  },
-  {
-    name: "Rectangle",
+    name: "entorno inmersivo",
     category: "3d",
     recent: false,
     image: iconPath("Rectangle.png"),
@@ -124,6 +118,30 @@ if (page === "home" && grid) {
     }
     if (index === 1) {
       window.location.href = "criollismo.html";
+      return;
+    }
+    if (index === 2) {
+      window.location.href = "s4-g8.html";
+      return;
+    }
+    if (index === 3) {
+      window.location.href = "la-dolce-vita.html";
+      return;
+    }
+    if (index === 5) {
+      window.location.href = "cafe.html";
+      return;
+    }
+    if (index === 6) {
+      window.location.href = "bb-asul-tp2.html";
+      return;
+    }
+    if (index === 8) {
+      window.location.href = "vuelta-griega.html";
+      return;
+    }
+    if (index === 9) {
+      window.location.href = "entorno-inmersivo.html";
       return;
     }
     console.log("Project clicked:", name);
