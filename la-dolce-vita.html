@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>la dolce vita — Jimena Haddad Gagliani</title>
+    <meta name="description" content="la dolce vita — collage editorial." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="la-dolce-vita.css" />
+  </head>
+  <body data-page="dolce-vita">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-row">
+          <div class="header-top">
+            <a class="help-btn" href="random.html" aria-label="Abrir página random">
+              ?
+            </a>
+            <h1 class="site-title">
+              <a class="site-title-link" href="index.html">Jimena Haddad Gagliani</a>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="dolce-page">
+      <div class="dolce-stage-wrap">
+        <div id="dolceStage" class="dolce-stage"></div>
+      </div>
+    </main>
+
+    <div class="dolce-modal" id="dolceModal" aria-hidden="true">
+      <div class="dolce-modal-overlay" data-dolce-close tabindex="-1"></div>
+      <div
+        class="dolce-modal-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dolceModalTitle"
+        aria-describedby="dolceModalBody"
+      >
+        <div class="dolce-modal-head">
+          <button class="dolce-modal-close" type="button" data-dolce-close>
+            cerrar
+          </button>
+          <h2 class="dolce-modal-title" id="dolceModalTitle"></h2>
+          <p class="dolce-modal-body" id="dolceModalBody"></p>
+        </div>
+        <div class="dolce-modal-media" id="dolceModalMedia" hidden></div>
+      </div>
+    </div>
+
+    <script src="script.js" defer></script>
+    <script src="la-dolce-vita.js" defer></script>
+  </body>
+</html>

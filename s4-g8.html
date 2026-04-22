@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S4 G8 — Jimena Haddad Gagliani</title>
+    <meta name="description" content="S4 G8 — video en sala proyectada." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="s4-g8.css" />
+  </head>
+  <body data-page="s4-g8">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-row header-row--twocol">
+          <div class="header-top">
+            <a class="help-btn" href="random.html" aria-label="Abrir página random">
+              ?
+            </a>
+            <h1 class="site-title">
+              <a class="site-title-link" href="index.html">Jimena Haddad Gagliani</a>
+            </h1>
+          </div>
+          <span class="header-project-name">S4 G8</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="s4-page">
+      <div class="s4-hero">
+        <p class="s4-hint">
+          Simulación de proyección en cuatro paredes (sin techo ni piso).
+          Arrastrá para girar la sala.
+        </p>
+        <div id="s4Scene" class="s4-scene" aria-label="Sala con video proyectado">
+          <div id="s4Room" class="s4-room">
+            <div class="s4-wall s4-wall--back">
+              <video
+                class="s4-video s4-video--q1"
+                src="materia/archivos%20faltantes%20pc/compressed.mp4"
+                muted
+                loop
+                playsinline
+                autoplay
+                preload="auto"
+              ></video>
+              <span class="s4-wire" aria-hidden="true"></span>
+            </div>
+            <div class="s4-wall s4-wall--left">
+              <video
+                class="s4-video s4-video--q2"
+                src="materia/archivos%20faltantes%20pc/compressed.mp4"
+                muted
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <span class="s4-wire" aria-hidden="true"></span>
+            </div>
+            <div class="s4-wall s4-wall--right">
+              <video
+                class="s4-video s4-video--q3"
+                src="materia/archivos%20faltantes%20pc/compressed.mp4"
+                muted
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <span class="s4-wire" aria-hidden="true"></span>
+            </div>
+            <div class="s4-wall s4-wall--front">
+              <video
+                class="s4-video s4-video--q4"
+                src="materia/archivos%20faltantes%20pc/compressed.mp4"
+                muted
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+              <span class="s4-wire" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js" defer></script>
+    <script src="s4-g8.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+/* vuelta griega — paneles fullscreen + galería renders KeyShot */
+
+.vg-page {
+  margin: 0;
+  background: var(--bg, #f5f5f5);
+}
+
+.vg-case {
+  max-width: none;
+  margin: 0;
+  padding: 8px 0 100px;
+}
+
+.vg-section {
+  scroll-margin-top: var(--sticky-header-offset);
+}
+
+.vg-section-title {
+  margin: 0;
+  padding: 28px clamp(20px, 4vw, 48px) 16px;
+  font-family: var(--subtitle-font);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.78);
+}
+
+.vg-section-lead {
+  margin: 0 0 8px;
+  padding: 0 clamp(20px, 4vw, 48px) 20px;
+  max-width: 52ch;
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+/* Paneles A2: stack vertical fullscreen ancho viewport */
+.vg-panel-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100vw;
+  max-width: 100%;
+  margin: 0 calc(50% - 50vw);
+  background: #0c0c0c;
+}
+
+.vg-panel-stack img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Bloque renders: ambiente “estudio 3D” */
+.vg-renders-zone {
+  margin-top: 48px;
+  padding: 48px 0 80px;
+  background: radial-gradient(
+      ellipse 120% 80% at 50% 0%,
+      #1a1f28 0%,
+      #0d0f12 45%,
+      #08090b 100%
+    );
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.vg-renders-zone .vg-section-title {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 0 40px rgba(120, 180, 255, 0.15);
+}
+
+.vg-renders-zone .vg-section-lead {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.vg-render-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: clamp(20px, 3vw, 36px);
+  padding: 8px clamp(16px, 3vw, 40px) 0;
+  max-width: min(1600px, 100%);
+  margin: 0 auto;
+}
+
+.vg-render-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #1e2430 0%, #12151c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 220ms ease;
+}
+
+.vg-render-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(120, 190, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.vg-render-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* “Marco” tipo viewport 3D + scanline muy suave = lectura render */
+.vg-render-frame {
+  position: relative;
+}
+
+.vg-render-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  margin: 6px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.vg-render-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.35) 2px,
+    rgba(0, 0, 0, 0.35) 3px
+  );
+  mix-blend-mode: overlay;
+}
+
+.vg-render-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+  max-width: calc(100% - 24px);
+}
+
+.vg-render-badge span {
+  font-family: var(--body-font);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(120, 200, 255, 0.35);
+  color: rgba(200, 230, 255, 0.95);
+  backdrop-filter: blur(8px);
+}
+
+.vg-render-caption {
+  margin: 0;
+  padding: 12px 14px 16px;
+  font-family: var(--body-font);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vg-render-card {
+    transition: none;
+  }
+
+  .vg-render-card:hover {
+    transform: none;
+  }
+}

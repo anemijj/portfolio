@@ -1,0 +1,313 @@
+/* la dolce vita — collage 3D a pantalla completa (sin recuadro) */
+
+.dolce-page {
+  min-height: 100vh;
+  padding: 0 0 100px;
+  margin: 0;
+  background: #f5f5f5;
+}
+
+.dolce-stage-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: clamp(16px, 3vw, 48px) clamp(20px, 4vw, 56px) 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: visible;
+  min-height: min(420vh, 5600px);
+  background: #fafafa;
+}
+
+.dolce-stage {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: inherit;
+  margin: 0 auto;
+  perspective: 1400px;
+  perspective-origin: 50% 32%;
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out;
+}
+
+.dolce-piece {
+  position: absolute;
+  transform-style: preserve-3d;
+  border-radius: 4px;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  background: #fff;
+  transition: transform 0.35s var(--ease, cubic-bezier(0.2, 0.8, 0.2, 1)),
+    box-shadow 0.35s ease, z-index 0s linear;
+  will-change: transform;
+  cursor: var(--cursor-pointer, pointer);
+  box-sizing: border-box;
+}
+
+.dolce-piece:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.25);
+  outline-offset: 3px;
+}
+
+.dolce-piece img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+/* Fanzine en galería: mini libro abierto (dos páginas + lomo) */
+.dolce-piece--fanzine {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.dolce-piece--fanzine:hover,
+.dolce-piece--fanzine:focus-visible {
+  box-shadow: none;
+}
+
+.dolce-book {
+  width: 100%;
+  min-height: clamp(140px, 26vw, 240px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 900px;
+  padding: 12px 0 20px;
+}
+
+.dolce-book-inner {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform: rotateX(10deg) rotateZ(-5deg);
+  gap: 0;
+  filter: drop-shadow(0 22px 36px rgba(0, 0, 0, 0.18));
+}
+
+.dolce-book-spread {
+  position: relative;
+  width: 42%;
+  max-width: 160px;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 2px 0 0 2px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+.dolce-book-spread--right {
+  border-radius: 0 2px 2px 0;
+}
+
+.dolce-book-spread img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+  border-radius: 0;
+}
+
+.dolce-book-spread--left {
+  transform: rotateY(-22deg);
+  transform-origin: 100% 50%;
+}
+
+.dolce-book-spread--right {
+  transform: rotateY(22deg);
+  transform-origin: 0% 50%;
+}
+
+.dolce-book-spine {
+  width: clamp(10px, 2.2vw, 18px);
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: 0 -1px;
+  z-index: 2;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    #2a2a2a 0%,
+    #6a6a6a 22%,
+    #b8b8b8 50%,
+    #6a6a6a 78%,
+    #2a2a2a 100%
+  );
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.dolce-piece:hover .dolce-book-inner,
+.dolce-piece:focus-visible .dolce-book-inner {
+  filter: drop-shadow(0 28px 44px rgba(0, 0, 0, 0.22));
+}
+
+.dolce-piece:hover,
+.dolce-piece:focus-visible {
+  z-index: 800 !important;
+}
+
+.dolce-piece:not(.dolce-piece--fanzine):hover,
+.dolce-piece:not(.dolce-piece--fanzine):focus-visible {
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+/* Modal */
+.dolce-modal[aria-hidden="true"] {
+  display: none;
+}
+
+.dolce-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  padding: 20px 14px;
+}
+
+.dolce-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: var(--cursor-pointer, pointer);
+}
+
+.dolce-modal-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(640px, calc(100vw - 28px));
+  max-height: min(92vh, 900px);
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
+  padding: 0;
+}
+
+.dolce-modal-head {
+  flex-shrink: 0;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.dolce-modal-close {
+  display: block;
+  margin: 0 0 10px auto;
+  font-family: var(--subtitle-font);
+  font-size: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  background: transparent;
+  padding: 6px 12px;
+  color: rgba(0, 0, 0, 0.75);
+  cursor: var(--cursor-pointer, pointer);
+}
+
+.dolce-modal-title {
+  margin: 0 0 8px;
+  font-family: var(--subtitle-font);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.dolce-modal-body {
+  margin: 0;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.76);
+  font-size: 14px;
+}
+
+.dolce-modal-media {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 14px 18px 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dolce-modal-media[hidden] {
+  display: none !important;
+}
+
+.dolce-modal-media:not([hidden]) {
+  display: block;
+}
+
+.dolce-modal-media > img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Fanzine en modal: columna con scroll */
+.dolce-modal-fanzine-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 8px;
+}
+
+.dolce-modal-fanzine-scroll img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+}
+
+.dolce-modal-pdf-link {
+  display: inline-block;
+  margin-top: 18px;
+  font-family: var(--subtitle-font);
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.82);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dolce-stage {
+    transition: none;
+  }
+
+  .dolce-piece {
+    transition: box-shadow 0.2s ease;
+  }
+
+  .dolce-book-spread--left,
+  .dolce-book-spread--right {
+    transform: none;
+  }
+
+  .dolce-book-inner {
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .dolce-stage-wrap {
+    min-height: 360vh;
+    padding-left: clamp(12px, 4vw, 28px);
+    padding-right: clamp(12px, 4vw, 28px);
+  }
+
+  .dolce-piece:not(.dolce-piece--fanzine) {
+    max-width: min(86vw, 320px) !important;
+  }
+
+  .dolce-book-spread {
+    max-width: 120px;
+  }
+}

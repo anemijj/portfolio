@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>crear sentido — Jimena Haddad Gagliani</title>
+    <meta name="description" content="Proyecto BB ASUL TP2: fanzine, página web y prototipo." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page="bb-asul-tp2">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-row header-row--project">
+          <div class="header-top">
+            <a class="help-btn" href="random.html" aria-label="Abrir página random">
+              ?
+            </a>
+            <h1 class="site-title">
+              <a class="site-title-link" href="index.html">Jimena Haddad Gagliani</a>
+            </h1>
+          </div>
+          <nav class="header-jump header-jump--bar" aria-label="En esta página">
+            <a href="#sec-fanzine" class="header-jump-btn">fanzine</a>
+            <a href="#sec-web" class="header-jump-btn">página web</a>
+            <a href="#sec-prototipo" class="header-jump-btn">prototipo</a>
+          </nav>
+          <span class="header-project-name">crear sentido</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="project-page">
+      <div class="case">
+        <section id="sec-fanzine" class="case-section" aria-label="1. Fanzine">
+          <header class="section-header">
+            <h2 class="section-title">1. FANZINE</h2>
+          </header>
+          <div class="embed embed--fullbleed embed--fanzine-fit">
+            <video
+              class="embed-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
+              <source src="materia/fanzine.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </section>
+
+        <section id="sec-web" class="case-section" aria-label="2. Página web">
+          <header class="section-header">
+            <h2 class="section-title">2. PÁGINA WEB</h2>
+          </header>
+          <div class="embed embed--fullbleed">
+            <video
+              class="embed-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
+              <source
+                src="materia/RECORRIDO%20COMPLETO%20SIN%20AUDIO%20%281%29.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </section>
+
+        <section id="sec-prototipo" class="case-section" aria-label="3. Prototipo">
+          <header class="section-header">
+            <h2 class="section-title">3. PROTOTIPO</h2>
+          </header>
+          <div class="figma-embed" aria-label="Prototipo Figma BB ASUL TP2">
+            <iframe
+              title="BB ASUL TP2 — prototipo Figma"
+              src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FTYvRzupzmTK2gJpajntWcB%2Fbb-asul-tp2%3Fnode-id%3D169-3872%26page-id%3D0%253A1%26starting-point-node-id%3D169%253A3872%26scaling%3Dcontain%26content-scaling%3Dresponsive%26t%3DqMSzjUQ52vaXmbuo-1"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
