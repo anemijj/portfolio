@@ -250,15 +250,16 @@ function revistaJpgUrl(fileName) {
     .join("/");
 }
 
-/** Nombres como en disco (NFD: o + combinante en “presentación”). */
+/** Mismo nombre que en git (NFC “presentación”); NFD rompe URLs en GitHub Pages (Linux). */
 const PRES_CRIOLLISMO_PREFIX =
-  "presentacio\u0301n identidad CRIOLLISMO_compressed_page-";
+  "presentación identidad CRIOLLISMO_compressed_page-";
 const PRES_CRIOLLISMO_FILES = Array.from({ length: 38 }, (_, i) =>
   `${PRES_CRIOLLISMO_PREFIX}${String(i + 1).padStart(4, "0")}.jpg`
 );
 
 function presCriollismoJpgUrl(fileName) {
-  return ["materia", "pres criollismo", fileName]
+  const normalized = fileName.normalize("NFC");
+  return ["materia", "pres criollismo", normalized]
     .map((segment) => encodeURIComponent(segment))
     .join("/");
 }
@@ -407,61 +408,44 @@ function initRevistaJpgStrip() {
   }
 }
 
+function mapaJpgUrl(fileName) {
+  return ["materia", "mapa", fileName]
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+}
+
+/**
+ * Galería del Este — botones sobre el SVG (coordenadas en % del contenedor).
+ * Ajustá x/y hasta que coincidan con tu referencia; `jpg` apunta al archivo en materia/mapa/.
+ */
+const MAP_GALLERY_POINTS = [
+  { id: "difusion", x: 20, y: 92, title: "Difusión", jpg: "Frame 75.jpg" },
+  { id: "cine", x: 30, y: 68, title: "Sala / cine", jpg: "Frame 74.jpg" },
+  { id: "circulacion", x: 55, y: 60, title: "Circulación", jpg: "Frame 77.jpg" },
+  { id: "comunidad", x: 56, y: 36, title: "Comunidad", jpg: "Frame 76.jpg" },
+  { id: "torre", x: 69, y: 30, title: "Espacio vertical", jpg: "Frame 78.jpg" },
+  { id: "preservacion", x: 68, y: 46, title: "Preservación", jpg: "Frame 79.jpg" },
+];
+
 function initInteractiveMap() {
   const stage = document.getElementById("mapStage");
   if (!stage) return;
 
-  // Circle data: positions are percentages relative to the image container.
-  const points = [
-    {
-      id: "entrada",
-      x: 18,
-      y: 32,
-      color: "#f6b6d8", // pastel pink
-      title: "Entrada",
-      description:
-        "Punto de llegada: compresión → apertura. Marca el ritmo inicial y el primer cambio de escala.",
-    },
-    {
-      id: "nucleo",
-      x: 56,
-      y: 28,
-      color: "#a7d8ff", // pastel blue
-      title: "Núcleo",
-      description:
-        "Centro operativo: organiza recorridos y vistas cruzadas. Acá se concentran decisiones de orientación.",
-    },
-    {
-      id: "umbral",
-      x: 74,
-      y: 58,
-      color: "#fde68a", // pastel yellow
-      title: "Umbral",
-      description:
-        "Transición: cambia la atmósfera. Luz, material y sonido acompañan el pasaje entre zonas.",
-    },
-  ];
-
-  points.forEach((p) => {
+  MAP_GALLERY_POINTS.forEach((p) => {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "marker";
+    btn.className = "marker marker--map";
     btn.style.left = `${p.x}%`;
     btn.style.top = `${p.y}%`;
     btn.dataset.markerId = p.id;
-    btn.dataset.markerColor = p.color;
-    btn.dataset.modalTitle = p.title;
-    btn.dataset.modalBody = p.description;
-    btn.setAttribute("aria-label", `Abrir detalle: ${p.title}`);
+    btn.setAttribute("aria-label", `Ampliar vista: ${p.title}`);
 
-    btn.addEventListener("mouseenter", () => {
-      btn.style.backgroundColor = p.color;
-    });
-    btn.addEventListener("mouseleave", () => {
-      btn.style.backgroundColor = "#000";
-    });
     btn.addEventListener("click", () => {
-      openModal({ title: p.title, body: p.description });
+      openModal({
+        title: "",
+        body: "",
+        imageSrc: mapaJpgUrl(p.jpg),
+      });
     });
 
     stage.appendChild(btn);
@@ -476,9 +460,11 @@ function initModal() {
 
   const titleEl = document.getElementById("modalTitle");
   const bodyEl = document.getElementById("modalBody");
+  const imageWrap = document.getElementById("modalImageWrap");
+  const panel = modal.querySelector(".modal-panel");
   const closeEls = Array.from(modal.querySelectorAll("[data-modal-close]"));
 
-  modalEls = { modal, titleEl, bodyEl };
+  modalEls = { modal, titleEl, bodyEl, imageWrap, panel };
 
   closeEls.forEach((el) =>
     el.addEventListener("click", () => {
@@ -491,20 +477,72 @@ function initModal() {
   });
 }
 
-function openModal({ title, body }) {
+function openModal({ title, body, imageSrc }) {
   if (!modalEls) return;
-  const { modal, titleEl, bodyEl } = modalEls;
+  const { modal, titleEl, bodyEl, imageWrap, panel } = modalEls;
 
-  if (titleEl) titleEl.textContent = title;
-  if (bodyEl) bodyEl.textContent = body;
+  modal.classList.toggle("modal--media-backdrop", Boolean(imageSrc));
+
+  if (titleEl) titleEl.textContent = title || "";
+  if (bodyEl) {
+    bodyEl.textContent = body || "";
+    bodyEl.hidden = Boolean(imageSrc) && !body;
+  }
+
+  if (imageWrap) {
+    if (imageSrc) {
+      imageWrap.hidden = false;
+      imageWrap.innerHTML = "";
+      const img = document.createElement("img");
+      img.src = imageSrc;
+      img.alt = "";
+      img.loading = "eager";
+      img.decoding = "async";
+      img.style.cursor = "pointer";
+      img.addEventListener("click", () => closeModal());
+      imageWrap.appendChild(img);
+    } else {
+      imageWrap.hidden = true;
+      imageWrap.innerHTML = "";
+    }
+  }
+
+  if (panel) {
+    panel.classList.toggle("modal-panel--with-image", Boolean(imageSrc));
+    if (imageSrc) {
+      panel.setAttribute(
+        "aria-label",
+        "Vista ampliada del mapa. Clic en la imagen o fuera para cerrar, o Escape."
+      );
+      panel.removeAttribute("aria-labelledby");
+      panel.removeAttribute("aria-describedby");
+    } else {
+      panel.removeAttribute("aria-label");
+      panel.setAttribute("aria-labelledby", "modalTitle");
+      panel.setAttribute("aria-describedby", "modalBody");
+    }
+  }
 
   modal.setAttribute("aria-hidden", "false");
 }
 
 function closeModal() {
   if (!modalEls) return;
-  const { modal } = modalEls;
+  const { modal, imageWrap, panel } = modalEls;
+  modal.classList.remove("modal--media-backdrop");
   modal.setAttribute("aria-hidden", "true");
+  if (imageWrap) {
+    imageWrap.hidden = true;
+    imageWrap.innerHTML = "";
+  }
+  if (panel) {
+    panel.classList.remove("modal-panel--with-image");
+    panel.removeAttribute("aria-label");
+    panel.setAttribute("aria-labelledby", "modalTitle");
+    panel.setAttribute("aria-describedby", "modalBody");
+  }
+  const bodyEl = modalEls.bodyEl;
+  if (bodyEl) bodyEl.hidden = false;
 }
 
 if (page === "project" || page === "criollismo") {

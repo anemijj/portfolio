@@ -68,18 +68,16 @@
           </p>
         </div>
 
-        <figure class="map">
-          <div class="map-stage" id="mapStage">
+        <figure class="map map--fullbleed">
+          <div class="map-stage map-stage--bare" id="mapStage">
             <img
               class="map-img"
-              alt="Diagrama de espacio"
-              src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221600%22%20height%3D%22900%22%20viewBox%3D%220%200%201600%20900%22%3E%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22%23ffffff%22/%3E%3Cpath%20d%3D%22M120%20140h540v260H120z%20M760%20140h720v560H760z%20M120%20470h540v230H120z%22%20fill%3D%22none%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.15)%22%20stroke-width%3D%226%22/%3E%3Cpath%20d%3D%22M220%20240h340M220%20310h260M850%20240h520M850%20320h420M850%20410h560%22%20stroke%3D%22rgba(0%2C0%2C0%2C0.10)%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22/%3E%3Ctext%20x%3D%22120%22%20y%3D%22820%22%20font-size%3D%2240%22%20font-family%3D%22IBM%20Plex%20Mono%2Cmonospace%22%20fill%3D%22rgba(0%2C0%2C0%2C0.35)%22%3EMapa%20%2F%20Diagrama%20(placeholder)%3C/text%3E%3C/svg%3E"
+              alt="Mapa isométrico — Galería del Este"
+              src="materia/mapa/mapa%20galeria.svg"
             />
-            <!-- Markers get injected here by JS -->
+            <!-- Botones .marker-map inyectados por script.js (ajustá x/y en MAP_GALLERY_POINTS) -->
           </div>
-          <figcaption class="caption">
-            Puntos interactivos: hover para color, click para abrir detalle.
-          </figcaption>
+         
         </figure>
       </section>
 
@@ -116,10 +114,6 @@
           <h2 class="section-title">3. REVISTA</h2>
         </header>
 
-        <p class="lead">
-          JPG en <code>materia/revistajpg/</code>: deslizá horizontalmente. Primera y
-          última lámina solas; el resto, dos páginas por vista.
-        </p>
 
         <div class="magazine magazine--fullbleed" aria-label="Revista">
           <div id="magStrip" class="mag-strip mag-strip--pdf" tabindex="0"></div>
@@ -140,6 +134,7 @@
             cerrar
           </button>
           <h2 class="modal-title" id="modalTitle"></h2>
+          <div id="modalImageWrap" class="modal-image-wrap" hidden></div>
           <p class="modal-body" id="modalBody"></p>
         </div>
       </div>

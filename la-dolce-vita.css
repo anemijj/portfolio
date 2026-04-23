@@ -7,6 +7,27 @@
   background: #f5f5f5;
 }
 
+/* Tira fanzine (misma UX que revista en project): título y márgenes acotados */
+.dolce-fanzine-section {
+  padding: 0 clamp(20px, 4vw, 56px) 80px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.dolce-fanzine-section .section-header {
+  margin-bottom: 12px;
+}
+
+.dolce-fanzine-section .section-title {
+  margin: 36px 0 8px;
+  font-size: clamp(22px, 4vw, 30px);
+}
+
+.dolce-fanzine-lead {
+  margin-bottom: 10px;
+  max-width: 72ch;
+}
+
 .dolce-stage-wrap {
   position: relative;
   width: 100%;
@@ -275,6 +296,50 @@
   color: rgba(0, 0, 0, 0.82);
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+/* Piezas JPG: solo imagen, sin marco ni scroll (mismo criterio que mapa en project) */
+.dolce-modal.dolce-modal--media-only {
+  padding: 12px 10px;
+}
+
+.dolce-modal.dolce-modal--media-only .dolce-modal-overlay {
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.dolce-modal.dolce-modal--media-only .dolce-modal-panel {
+  width: auto;
+  max-width: min(94vw, 720px);
+  max-height: none;
+  overflow: visible;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.dolce-modal.dolce-modal--media-only .dolce-modal-head {
+  display: none !important;
+}
+
+.dolce-modal.dolce-modal--media-only .dolce-modal-media {
+  flex: none;
+  min-height: 0;
+  overflow: visible;
+  padding: 0;
+}
+
+.dolce-modal.dolce-modal--media-only .dolce-modal-media > img {
+  display: block;
+  width: auto;
+  max-width: min(94vw, 720px);
+  max-height: min(82vh, 820px);
+  height: auto;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
 }
 
 @media (prefers-reduced-motion: reduce) {

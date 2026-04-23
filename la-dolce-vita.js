@@ -25,7 +25,16 @@
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  /** Posiciones más separadas (menos choque); brochures en columna izquierda */
+  /**
+   * === COLLAGE: posición de cada pieza (editá acá a mano) ===
+   * Todas las coordenadas son % del contenedor `.dolce-stage` (ancho del wrap).
+   * - `left`, `top`: esquina superior izquierda de la pieza.
+   * - `w`: ancho (alto lo define la imagen con aspect ratio).
+   * - `rotX`, `rotY`, `rotZ`, `z`, `depth`: 3D / parallax (no cambié en la redistribución).
+   *
+   * Redistribución (chat): brochures con más aire vertical; postales en franja 54–80%;
+   * reverso y afiche un poco más centrados; aficheta/extras separados en la base.
+   */
   const pieces = [
     {
       type: "img",
@@ -50,8 +59,8 @@
       title: "Brochure — lámina 2",
       detail: "Segunda lámina del brochure, continuidad del relato visual.",
       left: "5%",
-      top: "22%",
-      w: "19%",
+      top: "26%",
+      w: "18%",
       rotZ: 3,
       rotX: -3,
       rotY: 10,
@@ -65,8 +74,8 @@
       title: "Brochure — lámina 3",
       detail: "Tercera lámina: cierre de bloque y contraste con las anteriores.",
       left: "5%",
-      top: "40%",
-      w: "19%",
+      top: "49%",
+      w: "18%",
       rotZ: -2,
       rotX: 5,
       rotY: -6,
@@ -79,9 +88,9 @@
       group: "brochure",
       title: "Brochure — lámina 4",
       detail: "Cuarta lámina del brochure, desenlace del folleto.",
-      left: "5%",
-      top: "58%",
-      w: "19%",
+      left: "45%",
+      top: "52%",
+      w: "18%",
       rotZ: 6,
       rotX: -4,
       rotY: 11,
@@ -94,9 +103,9 @@
       group: "postal",
       title: "Postal 1",
       detail: "Frente de postal — pieza suelta del set de correspondencia.",
-      left: "62%",
-      top: "5%",
-      w: "14%",
+      left: "68%",
+      top: "3%",
+      w: "16%",
       rotZ: -12,
       rotX: 6,
       rotY: 14,
@@ -109,9 +118,9 @@
       group: "postal",
       title: "Postal 2",
       detail: "Postal con variación de color y composición respecto a la 1.",
-      left: "80%",
-      top: "8%",
-      w: "13%",
+      left: "76%",
+      top: "9%",
+      w: "16%",
       rotZ: 12,
       rotX: -5,
       rotY: -12,
@@ -124,9 +133,9 @@
       group: "postal",
       title: "Postal 3",
       detail: "Tercera postal del set, encuadre más abierto.",
-      left: "60%",
-      top: "24%",
-      w: "14%",
+      left: "86%",
+      top: "19%",
+      w: "16%",
       rotZ: -7,
       rotX: 4,
       rotY: 9,
@@ -139,9 +148,9 @@
       group: "postal",
       title: "Postal 4",
       detail: "Detalle gráfico y textura propia de esta variante.",
-      left: "78%",
-      top: "30%",
-      w: "13%",
+      left: "44%",
+      top: "26%",
+      w: "16%",
       rotZ: 9,
       rotX: -6,
       rotY: -9,
@@ -154,9 +163,9 @@
       group: "postal",
       title: "Postal 5",
       detail: "Quinta postal — juego tipográfico y fotografía.",
-      left: "58%",
-      top: "46%",
-      w: "14%",
+      left: "64%",
+      top: "21%",
+      w: "16%",
       rotZ: -10,
       rotX: 5,
       rotY: 12,
@@ -169,9 +178,9 @@
       group: "postal",
       title: "Postal 6",
       detail: "Última postal numerada del frente.",
-      left: "76%",
-      top: "52%",
-      w: "13%",
+      left: "32%",
+      top: "21%",
+      w: "16%",
       rotZ: 7,
       rotX: -4,
       rotY: -10,
@@ -184,9 +193,9 @@
       group: "postal",
       title: "Postal extra",
       detail: "Variante adicional fuera de la numeración principal.",
-      left: "66%",
-      top: "68%",
-      w: "12%",
+      left: "79%",
+      top: "26%",
+      w: "16%",
       rotZ: -14,
       rotX: 8,
       rotY: 16,
@@ -200,9 +209,9 @@
       title: "Reverso de las postales",
       detail:
         "Lámina con el dorso / mensajes del set: complementa los frentes de las postales.",
-      left: "28%",
-      top: "70%",
-      w: "30%",
+      left: "76%",
+      top: "14%",
+      w: "16%",
       rotZ: 2,
       rotX: -2,
       rotY: -6,
@@ -215,9 +224,9 @@
       group: "afiche",
       title: "Afiche",
       detail: "Pieza principal de afiche, escala y lectura a distancia.",
-      left: "32%",
-      top: "1%",
-      w: "26%",
+      left: "34%",
+      top: "5%",
+      w: "28%",
       rotZ: -4,
       rotX: 3,
       rotY: 5,
@@ -230,9 +239,9 @@
       group: "afiche",
       title: "Aficheta 1",
       detail: "Primera aficheta del sistema de piezas chicas.",
-      left: "22%",
+      left: "32%",
       top: "82%",
-      w: "14%",
+      w: "17%",
       rotZ: 11,
       rotX: -6,
       rotY: -12,
@@ -245,9 +254,9 @@
       group: "afiche",
       title: "Aficheta 2",
       detail: "Segunda aficheta, variación cromática.",
-      left: "8%",
-      top: "78%",
-      w: "13%",
+      left: "6%",
+      top: "72%",
+      w: "17%",
       rotZ: -8,
       rotX: 4,
       rotY: 10,
@@ -260,9 +269,9 @@
       group: "afiche",
       title: "Aficheta 3",
       detail: "Tercera aficheta del trío.",
-      left: "84%",
-      top: "72%",
-      w: "13%",
+      left: "80%",
+      top: "70%",
+      w: "17%",
       rotZ: 8,
       rotX: -5,
       rotY: -11,
@@ -275,9 +284,9 @@
       group: "extra",
       title: "Pieza extra 1",
       detail: "Material gráfico complementario del proyecto.",
-      left: "4%",
-      top: "8%",
-      w: "12%",
+      left: "26%",
+      top: "34%",
+      w: "31%",
       rotZ: -14,
       rotX: 8,
       rotY: 18,
@@ -290,30 +299,16 @@
       group: "extra",
       title: "Pieza extra 2",
       detail: "Segunda pieza extra, cierre de volumen menor.",
-      left: "4%",
-      top: "88%",
-      w: "12%",
+      left: "63%",
+      top: "36%",
+      w: "31%",
       rotZ: 11,
       rotX: -6,
       rotY: -14,
       z: 3,
       depth: 0.32,
     },
-    {
-      type: "fanzine",
-      group: "fanzine",
-      title: "Fanzine — La dolce vita",
-      detail:
-        "Pasá con el scroll para ver todas las páginas. Al final podés abrir el PDF original.",
-      left: "37%",
-      top: "94%",
-      w: "26%",
-      rotZ: -2,
-      rotX: 2,
-      rotY: 3,
-      z: 12,
-      depth: 0.65,
-    },
+
   ];
 
   const els = [];
@@ -331,16 +326,41 @@
   }
 
   function openModal(p) {
-    modalTitle.textContent = p.title;
-    modalBody.textContent = p.detail;
+    const panel = modal.querySelector(".dolce-modal-panel");
+
+    if (p.type === "img") {
+      modal.classList.add("dolce-modal--media-only");
+      if (panel) {
+        panel.setAttribute(
+          "aria-label",
+          "Pieza ampliada. Clic en la imagen o fuera para cerrar, o Escape."
+        );
+        panel.removeAttribute("aria-labelledby");
+        panel.removeAttribute("aria-describedby");
+      }
+      modalTitle.textContent = "";
+      modalBody.textContent = "";
+    } else {
+      modal.classList.remove("dolce-modal--media-only");
+      if (panel) {
+        panel.removeAttribute("aria-label");
+        panel.setAttribute("aria-labelledby", "dolceModalTitle");
+        panel.setAttribute("aria-describedby", "dolceModalBody");
+      }
+      modalTitle.textContent = p.title;
+      modalBody.textContent = p.detail;
+    }
+
     modalMedia.innerHTML = "";
     modalMedia.hidden = true;
 
     if (p.type === "img") {
       const img = document.createElement("img");
       img.src = BASE + encodeURIComponent(p.file);
-      img.alt = p.title;
+      img.alt = "";
       img.loading = "eager";
+      img.style.cursor = "pointer";
+      img.addEventListener("click", () => closeModal());
       modalMedia.appendChild(img);
       modalMedia.hidden = false;
     } else if (p.type === "fanzine") {
@@ -366,11 +386,20 @@
 
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    const closeBtn = modal.querySelector(".dolce-modal-close");
-    if (closeBtn) closeBtn.focus();
+    if (p.type !== "img") {
+      const closeBtn = modal.querySelector(".dolce-modal-close");
+      if (closeBtn) closeBtn.focus();
+    }
   }
 
   function closeModal() {
+    modal.classList.remove("dolce-modal--media-only");
+    const panel = modal.querySelector(".dolce-modal-panel");
+    if (panel) {
+      panel.removeAttribute("aria-label");
+      panel.setAttribute("aria-labelledby", "dolceModalTitle");
+      panel.setAttribute("aria-describedby", "dolceModalBody");
+    }
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
     modalMedia.innerHTML = "";
@@ -535,4 +564,75 @@
       hovered.delete(el);
     });
   });
+
+  /** Misma lógica que `buildRevistaSpreadPlan` en script.js (project). */
+  function buildDolceFanzineSpreadPlan(numPages) {
+    const n = numPages;
+    if (n < 1) return [];
+    if (n === 1) return [[1]];
+    const views = [[1]];
+    let i = 2;
+    while (i <= n - 1) {
+      if (i + 1 <= n - 1) {
+        views.push([i, i + 1]);
+        i += 2;
+      } else {
+        views.push([i]);
+        i += 1;
+      }
+    }
+    views.push([n]);
+    return views;
+  }
+
+  function dolceFanzineStripUrl(fileName) {
+    return FANZINE_BASE + encodeURIComponent(fileName);
+  }
+
+  function initDolceFanzineStrip() {
+    const strip = document.getElementById("dolceMagStrip");
+    if (!strip) return;
+
+    strip.innerHTML = "";
+    const files = FANZINE_PAGES;
+    const n = files.length;
+    if (n === 0) {
+      strip.innerHTML =
+        '<p class="pdf-error">No hay JPG en fanzine la dolce vita jpgs.</p>';
+      return;
+    }
+
+    const plan = buildDolceFanzineSpreadPlan(n);
+    let eagerLeft = 8;
+
+    for (const pageNums of plan) {
+      const spread = document.createElement("div");
+      const isSingle = pageNums.length === 1;
+      spread.className = isSingle
+        ? "pdf-spread pdf-spread--single revista-spread"
+        : "pdf-spread pdf-spread--double revista-spread";
+      spread.setAttribute("role", "group");
+      spread.setAttribute(
+        "aria-label",
+        isSingle
+          ? `Página ${pageNums[0]}`
+          : `Páginas ${pageNums[0]} y ${pageNums[1]}`
+      );
+
+      for (const pageNum of pageNums) {
+        const file = files[pageNum - 1];
+        if (!file) continue;
+        const img = document.createElement("img");
+        img.className = "revista-page-img";
+        img.src = dolceFanzineStripUrl(file);
+        img.alt = `Fanzine — página ${pageNum}`;
+        img.decoding = "async";
+        img.loading = eagerLeft-- > 0 ? "eager" : "lazy";
+        spread.appendChild(img);
+      }
+      strip.appendChild(spread);
+    }
+  }
+
+  initDolceFanzineStrip();
 })();
