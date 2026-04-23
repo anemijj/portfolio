@@ -1,4 +1,14 @@
-/* S4 G8 — sala 3D (cuatro paredes) con video proyectado */
+/* S4 G8 — sala 3D (cuatro paredes) con video proyectado.
+   Dimensiones del cuarto: todas las paredes tienen la misma altura reducida
+   (42.6% del nominal) y borde inferior en el piso de la sala. Cada pared
+   muestra la franja del cuadrante del video que calza visualmente.
+   Layout 2x2 del archivo compressed.mp4 (nominal 6396 x 2056):
+     q1 (0,    0)    3404 x 1028   -> pared izquierda (bottom 42.6%)
+     q2 (3404, 0)    2992 x 1028   -> pared fondo     (bottom 42.6%)
+     q3 (0,    1028) 3404 x 1028   -> pared derecha   (top 42.6%)
+     q4 (3404, 1028) 2992 x 1028   -> pared frente    (top 42.6%)
+   Sincronización perfecta: un único <video id="s4Src"> alimenta a los
+   4 <canvas> (uno por pared). Un <audio id="s4Audio"> aparte maneja sonido. */
 
 .s4-page {
   margin: 0;
@@ -18,22 +28,32 @@
 
 .s4-hint {
   margin: 0 0 16px;
-  max-width: 48ch;
+  max-width: 52ch;
   text-align: center;
   font-size: 12px;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.45);
 }
 
+.s4-src {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  opacity: 0;
+  pointer-events: none;
+  left: -9999px;
+  top: -9999px;
+}
+
 .s4-scene {
   flex: 1;
   width: 100%;
-  max-width: min(1100px, 100%);
+  max-width: min(1200px, 100%);
   min-height: min(72vh, 620px);
   display: grid;
   place-items: center;
-  perspective: 1100px;
-  perspective-origin: 50% 40%;
+  perspective: 1400px;
+  perspective-origin: 50% 45%;
   cursor: grab;
   touch-action: none;
   user-select: none;
@@ -48,9 +68,12 @@
   width: 0;
   height: 0;
   transform-style: preserve-3d;
-  --W: min(72vmin, 720px);
-  --H: min(48vmin, 480px);
-  --D: min(48vmin, 480px);
+  --H: min(32vmin, 300px);
+  --W: calc(var(--H) * 2.9105058); /* 2992 / 1028 */
+  --D: calc(var(--H) * 3.3112840); /* 3404 / 1028 */
+  /* Altura reducida de TODAS las paredes. Debe coincidir con
+     VISIBLE_FRAC del JS (0.426). */
+  --H34: calc(var(--H) * 0.426);
   transform: rotateX(var(--s4-rx, 6deg)) rotateY(var(--s4-ry, -22deg));
 }
 
@@ -63,89 +86,436 @@
   backface-visibility: hidden;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
     0 0 0 1px rgba(0, 0, 0, 0.4);
+  background: #000;
 }
 
-.s4-wall video {
+.s4-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: block;
-  width: 200%;
-  height: 200%;
-  max-width: none;
-  object-fit: fill;
   pointer-events: none;
 }
 
-/* El archivo viene en 4 cuadrantes:
-   q1 = arriba-izq, q2 = arriba-der, q3 = abajo-izq, q4 = abajo-der */
-.s4-video--q1 {
-  transform: translate(0%, 0%);
-}
+/* Las 4 paredes ahora comparten la misma altura --H34 y el mismo margin-top,
+   pegadas al piso. Se diferencian sólo por el ancho (W fondo/frente vs D
+   laterales) y la rotación. */
 
-.s4-video--q2 {
-  transform: translate(-50%, 0%);
-}
-
-.s4-video--q3 {
-  transform: translate(0%, -50%);
-}
-
-.s4-video--q4 {
-  transform: translate(-50%, -50%);
-}
-
-/* Pared fondo (hacia donde mirás) */
-.s4-wall--back {
-  width: var(--W);
-  height: var(--H);
-  margin-left: calc(-0.5 * var(--W));
-  margin-top: calc(-0.5 * var(--H));
-  transform: translateZ(calc(-0.5 * var(--D)));
-}
-
-/* Laterales */
-.s4-wall--left {
+.s4-wall--left,
+.s4-wall--right {
   width: var(--D);
-  height: var(--H);
+  height: var(--H34);
   margin-left: calc(-0.5 * var(--D));
-  margin-top: calc(-0.5 * var(--H));
+  margin-top: calc(0.5 * var(--H) - var(--H34));
+}
+
+.s4-wall--back,
+.s4-wall--front {
+  width: var(--W);
+  height: var(--H34);
+  margin-left: calc(-0.5 * var(--W));
+  margin-top: calc(0.5 * var(--H) - var(--H34));
+}
+
+.s4-wall--left {
   transform: rotateY(90deg) translateZ(calc(-0.5 * var(--W)));
 }
 
 .s4-wall--right {
-  width: var(--D);
-  height: var(--H);
-  margin-left: calc(-0.5 * var(--D));
-  margin-top: calc(-0.5 * var(--H));
   transform: rotateY(-90deg) translateZ(calc(-0.5 * var(--W)));
 }
 
-/* Cuarta pared (frontal) */
-.s4-wall--front {
-  width: var(--W);
-  height: var(--H);
-  margin-left: calc(-0.5 * var(--W));
-  margin-top: calc(-0.5 * var(--H));
-  transform: rotateY(180deg) translateZ(calc(-0.5 * var(--D)));
-  opacity: 0.42;
+.s4-wall--back {
+  transform: translateZ(calc(-0.5 * var(--D)));
 }
 
-/* Líneas “arquitectónicas” suaves (lectura mockup) */
+.s4-wall--front {
+  transform: rotateY(180deg) translateZ(calc(-0.5 * var(--D)));
+}
+
 .s4-wire {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.35;
+  opacity: 0.22;
   background: linear-gradient(
       to bottom,
       transparent 0%,
-      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.06) 50%,
       transparent 100%
     ),
     linear-gradient(
       to right,
       transparent 0%,
-      rgba(255, 255, 255, 0.06) 50%,
+      rgba(255, 255, 255, 0.05) 50%,
       transparent 100%
     );
+}
+
+/* ------------ Reproductor de audio (mini-mp3 player chrome) ------------ */
+
+/* Rack fijo en la parte superior: créditos a los costados, player al centro.
+   Grid 1fr / auto / 1fr → el player (col auto) queda centrado exacto en la
+   página sin importar el ancho de los paneles laterales. */
+.s4-player-rack {
+  position: fixed;
+  top: calc(var(--sticky-header-offset, 60px) + 34px);
+  left: 14px;
+  right: 14px;
+  z-index: 25;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  gap: 12px;
+
+  /* El rack no debe capturar clicks entre paneles (no tapar la sala). */
+  pointer-events: none;
+}
+
+.s4-player-rack > * {
+  pointer-events: auto;
+}
+
+.s4-creds--left {
+  justify-self: start;
+}
+
+.s4-player {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 5px 8px;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(20, 30, 40, 0.85);
+  user-select: none;
+
+  /* Carcasa chrome con gradiente azul pálido → gris-azulado oscuro */
+  background: linear-gradient(
+    to bottom,
+    #e6eff4 0%,
+    #c6d6de 45%,
+    #7e94a2 70%,
+    #556876 100%
+  );
+  border: 1px solid #3b4b57;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 1px 0 0 rgba(255, 255, 255, 0.55),
+    inset -1px 0 0 rgba(0, 0, 0, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.28),
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.s4-creds--right {
+  justify-self: end;
+}
+
+/* Botón de play/pause: pastilla chrome circular */
+.s4-player__btn {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: #123;
+  cursor: pointer;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 30%,
+    #ffffff 0%,
+    #d4e2ea 35%,
+    #8aa1b1 75%,
+    #526776 100%
+  );
+  border: 1px solid #2d3a45;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: transform 80ms ease, box-shadow 80ms ease;
+}
+
+.s4-player__btn:hover {
+  background: radial-gradient(
+    circle at 50% 30%,
+    #ffffff 0%,
+    #dfedf3 35%,
+    #97adbd 75%,
+    #5c7180 100%
+  );
+}
+
+.s4-player__btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.s4-player__btn:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    0 0 0 2px rgba(160, 210, 240, 0.85);
+}
+
+.s4-player__icon {
+  font-size: 9px;
+  line-height: 1;
+  padding-left: 1px; /* el ▶ queda ópticamente descentrado */
+}
+
+.s4-player.is-playing .s4-player__icon {
+  padding-left: 0;
+}
+
+/* Display tipo LCD */
+.s4-player__screen {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 3px 8px;
+  min-width: 150px;
+
+  background: linear-gradient(
+    to bottom,
+    #1c3547 0%,
+    #2a506d 50%,
+    #203f56 100%
+  );
+  border: 1px solid #0d1b28;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.55),
+    inset 0 0 12px rgba(140, 220, 255, 0.1);
+
+  color: #bfe6fa;
+  text-shadow: 0 0 4px rgba(150, 220, 255, 0.55);
+  font-family: "VT323", ui-monospace, monospace;
+  font-size: 14px;
+  line-height: 1.05;
+  letter-spacing: 0.08em;
+}
+
+.s4-player__marquee {
+  font-size: 11px;
+  opacity: 0.85;
+  letter-spacing: 0.12em;
+}
+
+.s4-player__time {
+  display: inline-flex;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+}
+
+.s4-player__sep {
+  opacity: 0.45;
+}
+
+/* Volumen: etiqueta VOL + slider + %  */
+.s4-player__vol {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 2px;
+}
+
+.s4-player__voltag {
+  font-family: "VT323", ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: #1a2530;
+  opacity: 0.75;
+}
+
+.s4-player__range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 92px;
+  height: 14px;
+  background: transparent;
+  cursor: pointer;
+  margin: 0;
+}
+
+.s4-player__range::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #2f4a5c, #5b7b90);
+  box-shadow:
+    inset 0 1px 1px rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.s4-player__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -4.5px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 30%,
+    #ffffff 0%,
+    #d1e1eb 40%,
+    #7891a3 90%
+  );
+  border: 1px solid #2d3a45;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 1px 1px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.s4-player__range::-moz-range-track {
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #2f4a5c, #5b7b90);
+  border: none;
+}
+
+.s4-player__range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 30%,
+    #ffffff 0%,
+    #d1e1eb 40%,
+    #7891a3 90%
+  );
+  border: 1px solid #2d3a45;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 1px 1px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.s4-player__range:focus-visible::-webkit-slider-thumb,
+.s4-player__range:focus-visible::-moz-range-thumb {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 0 0 3px rgba(160, 210, 240, 0.7);
+}
+
+.s4-player__pct {
+  min-width: 2.2em;
+  font-family: "VT323", ui-monospace, monospace;
+  font-size: 13px;
+  color: #1a2530;
+  text-align: right;
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Estado muteado: pantalla apagada, puntito gris */
+.s4-player.is-muted .s4-player__screen {
+  color: rgba(191, 230, 250, 0.35);
+  text-shadow: none;
+  background: linear-gradient(
+    to bottom,
+    #182a38 0%,
+    #1f3448 50%,
+    #1a2b3b 100%
+  );
+}
+
+.s4-player.is-muted .s4-player__range::-webkit-slider-thumb,
+.s4-player.is-muted .s4-player__range::-moz-range-thumb {
+  background: radial-gradient(
+    circle at 40% 30%,
+    #e6ecf0 0%,
+    #aeb9c2 50%,
+    #6e7a85 100%
+  );
+}
+
+/* ------------ Paneles de créditos (estilo Winamp sidebar) ------------ */
+
+.s4-creds {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  padding: 5px 8px;
+  max-width: 260px;
+
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: rgba(20, 30, 40, 0.85);
+  user-select: none;
+
+  background: linear-gradient(
+    to bottom,
+    #e6eff4 0%,
+    #c6d6de 45%,
+    #7e94a2 70%,
+    #556876 100%
+  );
+  border: 1px solid #3b4b57;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 1px 0 0 rgba(255, 255, 255, 0.55),
+    inset -1px 0 0 rgba(0, 0, 0, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.28),
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.s4-creds__label {
+  align-self: center;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1a2530;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.s4-creds__screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3px 8px;
+  min-width: 0;
+
+  font-family: "VT323", ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  color: #bfe6fa;
+  text-shadow: 0 0 4px rgba(150, 220, 255, 0.55);
+
+  background: linear-gradient(
+    to bottom,
+    #1c3547 0%,
+    #2a506d 50%,
+    #203f56 100%
+  );
+  border: 1px solid #0d1b28;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.55),
+    inset 0 0 12px rgba(140, 220, 255, 0.1);
+}
+
+.s4-creds__screen span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -153,12 +523,62 @@
     cursor: default;
     touch-action: auto;
   }
+  .s4-player__btn {
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .s4-creds {
+    max-width: 200px;
+  }
+  .s4-creds__label {
+    display: none;
+  }
+  .s4-creds__screen {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 640px) {
   .s4-room {
-    --W: min(88vw, 520px);
-    --H: min(58vw, 380px);
-    --D: min(52vw, 340px);
+    --H: min(24vmin, 200px);
+  }
+
+  /* En mobile: sólo el player centrado, los créditos se ocultan */
+  .s4-player-rack {
+    top: calc(var(--sticky-header-offset, 60px) + 10px);
+    grid-template-columns: 1fr;
+    justify-items: center;
+    left: 10px;
+    right: 10px;
+  }
+
+  .s4-creds {
+    display: none;
+  }
+
+  .s4-player {
+    gap: 6px;
+    padding: 4px 6px;
+    font-size: 9px;
+  }
+
+  .s4-player__screen {
+    min-width: 108px;
+    padding: 2px 6px;
+    font-size: 12px;
+  }
+
+  .s4-player__marquee {
+    font-size: 10px;
+  }
+
+  .s4-player__range {
+    width: 64px;
+  }
+
+  .s4-player__voltag {
+    display: none;
   }
 }

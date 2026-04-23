@@ -39,56 +39,111 @@
       <div class="s4-hero">
         <p class="s4-hint">
           Simulación de proyección en cuatro paredes (sin techo ni piso).
-          Arrastrá para girar la sala.
+          Arrastrá para girar la sala 360°.
         </p>
+
+        <!-- Único video fuente (oculto). Los 4 canvas leen sus frames. -->
+        <video
+          id="s4Src"
+          class="s4-src"
+          src="materia/compressed.mp4"
+          muted
+          loop
+          playsinline
+          autoplay
+          preload="auto"
+          aria-hidden="true"
+        ></video>
+
+        <!-- Audio (arranca muted para que el browser permita autoplay) -->
+        <audio
+          id="s4Audio"
+          src="materia/audio.wav"
+          loop
+          preload="auto"
+          muted
+        ></audio>
+
         <div id="s4Scene" class="s4-scene" aria-label="Sala con video proyectado">
           <div id="s4Room" class="s4-room">
-            <div class="s4-wall s4-wall--back">
-              <video
-                class="s4-video s4-video--q1"
-                src="materia/archivos%20faltantes%20pc/compressed.mp4"
-                muted
-                loop
-                playsinline
-                autoplay
-                preload="auto"
-              ></video>
+            <div class="s4-wall s4-wall--left">
+              <canvas class="s4-canvas" data-q="1"></canvas>
               <span class="s4-wire" aria-hidden="true"></span>
             </div>
-            <div class="s4-wall s4-wall--left">
-              <video
-                class="s4-video s4-video--q2"
-                src="materia/archivos%20faltantes%20pc/compressed.mp4"
-                muted
-                loop
-                playsinline
-                preload="auto"
-              ></video>
+            <div class="s4-wall s4-wall--back">
+              <canvas class="s4-canvas" data-q="2"></canvas>
               <span class="s4-wire" aria-hidden="true"></span>
             </div>
             <div class="s4-wall s4-wall--right">
-              <video
-                class="s4-video s4-video--q3"
-                src="materia/archivos%20faltantes%20pc/compressed.mp4"
-                muted
-                loop
-                playsinline
-                preload="auto"
-              ></video>
+              <canvas class="s4-canvas" data-q="3"></canvas>
               <span class="s4-wire" aria-hidden="true"></span>
             </div>
             <div class="s4-wall s4-wall--front">
-              <video
-                class="s4-video s4-video--q4"
-                src="materia/archivos%20faltantes%20pc/compressed.mp4"
-                muted
-                loop
-                playsinline
-                preload="auto"
-              ></video>
+              <canvas class="s4-canvas" data-q="4"></canvas>
               <span class="s4-wire" aria-hidden="true"></span>
             </div>
           </div>
+        </div>
+
+        <!-- Rack estilo Winamp: créditos a los costados + player al centro -->
+        <div class="s4-player-rack">
+          <aside
+            class="s4-creds s4-creds--left"
+            aria-label="Software utilizado"
+          >
+            <span class="s4-creds__label">MADE WITH</span>
+            <div class="s4-creds__screen">
+              <span>AFTER EFFECTS</span>
+              <span>BLENDER</span>
+              <span>FL STUDIO</span>
+            </div>
+          </aside>
+
+          <div
+            id="s4Player"
+            class="s4-player"
+            role="group"
+            aria-label="Control de audio"
+          >
+            <button
+              class="s4-player__btn"
+              id="s4AudioToggle"
+              type="button"
+              aria-pressed="false"
+              aria-label="Activar audio"
+            >
+              <span class="s4-player__icon" data-icon="play">▶</span>
+            </button>
+            <div class="s4-player__screen" aria-hidden="true">
+              <span class="s4-player__marquee">PROYECCIONES</span>
+              <span class="s4-player__time">
+                <span id="s4AudioTime">00:00</span>
+                <span class="s4-player__sep">/</span>
+                <span id="s4AudioDur">--:--</span>
+              </span>
+            </div>
+            <div class="s4-player__vol" aria-label="Volumen">
+              <span class="s4-player__voltag">VOL</span>
+              <input
+                class="s4-player__range"
+                id="s4AudioVol"
+                type="range"
+                min="0"
+                max="100"
+                value="70"
+                aria-label="Volumen"
+              />
+              <span class="s4-player__pct" id="s4AudioPct">70</span>
+            </div>
+          </div>
+
+          <aside class="s4-creds s4-creds--right" aria-label="Colaboración">
+            <span class="s4-creds__label">WITH</span>
+            <div class="s4-creds__screen">
+              <span>GERONIMO ZIMMERMANN</span>
+              <span>AMADEO RIVA</span>
+            </div>
+          </aside>
         </div>
       </div>
     </main>
