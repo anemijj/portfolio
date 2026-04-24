@@ -100,15 +100,42 @@
               </p>
             </div>
           </div>
+        </section>
 
-          <blockquote class="soma-quote">
-            <p>
-              “La info que te da tiene más sentido. No es solo ‘entrenaste
-              duro, descansa’ — te dice por qué tu cuerpo respondió así ese
-              día, qué pasó con tu HRV, cómo vas vs tu baseline.”
-            </p>
-            <footer>— Diego, programa beta</footer>
-          </blockquote>
+        <section class="case-section soma-section soma-roles-section" aria-label="Rol">
+          <header class="section-header">
+            <h2 class="section-title soma-section-title">rol</h2>
+          </header>
+
+          <div class="soma-roles-grid">
+            <div class="soma-role">
+              <h3>Producto · App</h3>
+              <ul>
+                <li>Arquitectura de información</li>
+                <li>UX / UI</li>
+                <li>Sistema de componentes y tokens</li>
+                <li>Visualización de datos</li>
+                <li>Prototipado interactivo</li>
+              </ul>
+            </div>
+            <div class="soma-role">
+              <h3>Web</h3>
+              <ul>
+                <li>Diseño de interfaz</li>
+                <li>Layout responsive</li>
+                <li>Dirección de arte</li>
+              </ul>
+            </div>
+            <div class="soma-role">
+              <h3>Social</h3>
+              <ul>
+                <li>Dirección creativa</li>
+                <li>Diseño de piezas</li>
+                <li>Voz y tono visual</li>
+                <li>Fotografía de producto</li>
+              </ul>
+            </div>
+          </div>
         </section>
 
         <section
@@ -423,39 +450,21 @@
           </div>
         </section>
 
-        <section class="case-section soma-section soma-roles-section" aria-label="Rol">
-          <header class="section-header">
-            <h2 class="section-title soma-section-title">rol</h2>
-          </header>
-
-          <div class="soma-roles-grid">
-            <div class="soma-role">
-              <h3>Producto · App</h3>
-              <ul>
-                <li>Arquitectura de información</li>
-                <li>UX / UI</li>
-                <li>Sistema de componentes y tokens</li>
-                <li>Visualización de datos</li>
-                <li>Prototipado interactivo</li>
-              </ul>
-            </div>
-            <div class="soma-role">
-              <h3>Web</h3>
-              <ul>
-                <li>Diseño de interfaz</li>
-                <li>Layout responsive</li>
-                <li>Dirección de arte</li>
-              </ul>
-            </div>
-            <div class="soma-role">
-              <h3>Social</h3>
-              <ul>
-                <li>Dirección creativa</li>
-                <li>Diseño de piezas</li>
-                <li>Voz y tono visual</li>
-                <li>Fotografía de producto</li>
-              </ul>
-            </div>
+        <section
+          id="sec-anillo"
+          class="case-section soma-section soma-ring-section"
+          aria-label="Render del anillo"
+        >
+          <div class="soma-ring-stage" aria-hidden="true">
+            <video
+              class="soma-ring-video"
+              src="materia/anillo/anillo.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
           </div>
         </section>
       </div>
@@ -483,6 +492,19 @@
               img.style.visibility = "";
             });
           }
+        });
+        /* Mismo trato para <video>: si el archivo no existe todavía, escondemos
+           el elemento así el fondo del stage queda limpio. */
+        main.querySelectorAll("video").forEach((video) => {
+          video.addEventListener("error", () => {
+            video.style.visibility = "hidden";
+          });
+          /* En Safari, un <source> o src inválido dispara 'error' sobre el
+             <video>; también cubrimos el caso donde networkState queda en
+             NO_SOURCE tras el primer intento. */
+          video.addEventListener("loadedmetadata", () => {
+            video.style.visibility = "";
+          });
         });
       })();
     </script>
