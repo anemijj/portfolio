@@ -674,45 +674,49 @@ section[id].case-section {
   border: 0;
 }
 
-/* Lookbook digital — embebe el sketch p5 (1920x1280) y lo escala a
-   cualquier ancho de contenedor usando container query units en el
-   transform. La aspect-ratio del wrap mantiene la proporción nativa,
-   así nada se deforma. */
+/* Lookbook digital — el sketch p5 tiene tamaño nativo fijo (1920x1280).
+   Lo mostramos a pantalla completa (viewport menos el header), sin bordes
+   ni sombras. El iframe se escala proporcionalmente a lo que "entre" en
+   el contenedor usando container query units:
+     scale = min(ancho-disponible / 1920, alto-disponible / 1280)
+   Si la pantalla es muy ancha queda limitada por altura; si es muy
+   angosta, por ancho. Se centra siempre. */
 .lookbook-digital-page {
-  padding: 12px clamp(12px, 3vw, 28px) 48px;
+  padding: 0;
+  margin: 0;
+  background: #e9e9e9;
 }
 
 .lookbook-digital-hint {
-  margin: 0 auto 14px;
-  max-width: 72ch;
-  font-size: 12px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.45);
-  text-align: center;
+  display: none;
 }
 
 .lookbook-digital-frame-wrap {
-  width: min(100%, 1100px);
-  margin: 0 auto;
-  aspect-ratio: 1920 / 1280;
-  container-type: inline-size;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: calc(100vh - var(--sticky-header-offset));
+  height: calc(100dvh - var(--sticky-header-offset));
   position: relative;
   overflow: hidden;
   background: #e9e9e9;
-  border-radius: var(--radius, 6px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  container-type: size;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .lookbook-digital-frame {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 1920px;
   height: 1280px;
   border: 0;
-  transform-origin: top left;
-  transform: scale(calc(100cqw / 1920));
+  background: #e9e9e9;
+  transform-origin: center;
+  transform: scale(
+    min(calc(100cqw / 1920px), calc(100cqh / 1280px))
+  );
 }
 
 /* Visor 360 (Three.js + MP4 equirectangular) */
