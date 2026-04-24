@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@100..900&display=swap');
+
+body {
+    background: #DCDCDC;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1, h2 {
+    text-align: center;
+    opacity: 0; 
+    transform: translateY(50px); 
+    animation: fadeInUp 1s forwards; 
+}
+
+h1 {
+    font-family: "Italiana", sans-serif;
+    font-weight: 400;
+    font-size: 100px;
+    margin-top: 20%;
+    animation-delay: 0.5s;
+}
+
+h2 {
+    font-family:"Montserrat", sans-serif;
+    font-weight: 300;
+    padding: 2px;
+    margin-top: -70px;
+    margin-bottom: 20px;
+    animation-delay: 1s; 
+}
+
+.boton-enlace {
+    display: inline-block;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    width: 250px;
+    height: auto;
+    margin: auto;
+    margin-top: 20px;
+    line-height: 27px;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    opacity: 0;
+    transform: translateY(50px); 
+    animation: fadeInUp 1s forwards;
+    animation-delay: 1.5s;
+}
+
+.boton-enlace:hover {
+    background-color: #a9a9a9;
+    color: white;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    gap: 10px;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

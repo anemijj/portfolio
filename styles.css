@@ -674,6 +674,47 @@ section[id].case-section {
   border: 0;
 }
 
+/* Lookbook digital — embebe el sketch p5 (1920x1280) y lo escala a
+   cualquier ancho de contenedor usando container query units en el
+   transform. La aspect-ratio del wrap mantiene la proporción nativa,
+   así nada se deforma. */
+.lookbook-digital-page {
+  padding: 12px clamp(12px, 3vw, 28px) 48px;
+}
+
+.lookbook-digital-hint {
+  margin: 0 auto 14px;
+  max-width: 72ch;
+  font-size: 12px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+.lookbook-digital-frame-wrap {
+  width: min(100%, 1100px);
+  margin: 0 auto;
+  aspect-ratio: 1920 / 1280;
+  container-type: inline-size;
+  position: relative;
+  overflow: hidden;
+  background: #e9e9e9;
+  border-radius: var(--radius, 6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.lookbook-digital-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 1280px;
+  border: 0;
+  transform-origin: top left;
+  transform: scale(calc(100cqw / 1920));
+}
+
 /* Visor 360 (Three.js + MP4 equirectangular) */
 .case--vr360 {
   position: relative;

@@ -62,10 +62,10 @@ const projects = [
     image: iconPath("pc 1.png"),
   },
   {
-    name: "Pieza gráfica",
-    category: "3d",
+    name: "lookbook digital",
+    category: "web",
     recent: false,
-    image: iconPath("d36674ac0f3fa9c16b7fc9557c99572d 1.png"),
+    image: iconPath("cartita.png"),
   },
   {
     name: "vuelta griega",
@@ -134,6 +134,10 @@ if (page === "home" && grid) {
     }
     if (index === 6) {
       window.location.href = "bb-asul-tp2.html";
+      return;
+    }
+    if (index === 7) {
+      window.location.href = "lookbook-digital.html";
       return;
     }
     if (index === 8) {
