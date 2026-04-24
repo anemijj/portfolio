@@ -700,23 +700,27 @@ section[id].case-section {
   position: relative;
   overflow: hidden;
   background: #e9e9e9;
-  container-type: size;
-  display: grid;
-  place-items: center;
   border: 0;
   border-radius: 0;
   box-shadow: none;
 }
 
+/* El iframe se posiciona y escala por JS (ver script inline en
+   lookbook-digital.html). Escalar + centrar con puro CSS requería dividir
+   length/length (no es CSS válido) o confiar en `place-items: center` con
+   un ítem más grande que la celda, que en algunos Safari se pinea al
+   final en vez de centrar. Mejor explícito: transform-origin top-left y
+   offsets precalculados. */
 .lookbook-digital-frame {
+  position: absolute;
+  top: var(--fit-y, 0);
+  left: var(--fit-x, 0);
   width: 1920px;
   height: 1280px;
   border: 0;
   background: #e9e9e9;
-  transform-origin: center;
-  transform: scale(
-    min(calc(100cqw / 1920px), calc(100cqh / 1280px))
-  );
+  transform-origin: top left;
+  transform: scale(var(--fit-scale, 0.5));
 }
 
 /* Visor 360 (Three.js + MP4 equirectangular) */

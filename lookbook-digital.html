@@ -52,5 +52,41 @@
         ></iframe>
       </div>
     </main>
+
+    <script>
+      /* El sketch tiene tamaño nativo 1920x1280 (ancho fijo, no responsive).
+         Calculamos el factor de escala para que entre completo dentro del
+         contenedor (viewport menos header), sin deformar ni recortar, y
+         los offsets para centrarlo. Los inyectamos como CSS vars:
+           --fit-scale → transform: scale(...)
+           --fit-x, --fit-y → left/top del iframe
+         Se recalcula en resize y con ResizeObserver sobre el wrap. */
+      (function () {
+        const wrap = document.querySelector(".lookbook-digital-frame-wrap");
+        const frame = document.querySelector(".lookbook-digital-frame");
+        if (!wrap || !frame) return;
+        const NATIVE_W = 1920;
+        const NATIVE_H = 1280;
+        function fit() {
+          const W = wrap.clientWidth;
+          const H = wrap.clientHeight;
+          if (W <= 0 || H <= 0) return;
+          const s = Math.min(W / NATIVE_W, H / NATIVE_H);
+          const x = (W - NATIVE_W * s) / 2;
+          const y = (H - NATIVE_H * s) / 2;
+          frame.style.setProperty("--fit-scale", String(s));
+          frame.style.setProperty("--fit-x", x + "px");
+          frame.style.setProperty("--fit-y", y + "px");
+        }
+        /* Una pasada inmediata y otra en el siguiente frame por si el
+           layout todavía no estabilizó cuando se ejecuta el script. */
+        fit();
+        requestAnimationFrame(fit);
+        window.addEventListener("resize", fit);
+        if (typeof ResizeObserver !== "undefined") {
+          new ResizeObserver(fit).observe(wrap);
+        }
+      })();
+    </script>
   </body>
 </html>
