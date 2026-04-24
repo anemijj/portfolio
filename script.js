@@ -44,8 +44,8 @@ const projects = [
     image: iconPath("trabajo 2-07 1.png"),
   },
   {
-    name: "Logo SOMA",
-    category: "editorial",
+    name: "SOMA",
+    category: "web",
     recent: true,
     image: iconPath("Logo SOMA png sin texto-07 1.png"),
   },
@@ -126,6 +126,10 @@ if (page === "home" && grid) {
     }
     if (index === 3) {
       window.location.href = "la-dolce-vita.html";
+      return;
+    }
+    if (index === 4) {
+      window.location.href = "soma.html";
       return;
     }
     if (index === 5) {

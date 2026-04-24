@@ -1,0 +1,411 @@
+/* SOMA — case study
+   Complementa styles.css. Heredamos .case, .case-section, .two-col, etc.
+   Aquí vive solo lo específico: hero, grids de fotos y comportamiento de
+   placeholders (las <img> reservan aspect-ratio y muestran alt text cuando
+   el archivo todavía no existe, así el layout se ve igual con o sin fotos).
+*/
+
+/* Desactivamos el margen gigante de .section-title (100px) para esta página.
+   El espaciado vertical lo manejamos con .case-section + .soma-section. */
+.soma-page .section-title.soma-section-title {
+  margin: 0;
+  font-size: clamp(26px, 3.6vw, 44px);
+  letter-spacing: 0.03em;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.soma-page .section-header {
+  margin-bottom: 32px;
+}
+
+.soma-page .case {
+  padding-top: 8px;
+  padding-bottom: 120px;
+}
+
+.soma-page .case-section {
+  margin-top: 96px;
+}
+
+.soma-page .case > .case-section:first-of-type {
+  margin-top: 60px;
+}
+
+.soma-page .two-col.soma-two-col {
+  margin-top: 24px;
+  margin-bottom: 48px;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.soma-page .soma-two-col p {
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.85;
+  color: rgba(0, 0, 0, 0.78);
+}
+
+.soma-page .soma-two-col .soma-lead {
+  font-family: var(--subtitle-font);
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.35;
+  color: rgba(0, 0, 0, 0.92);
+  letter-spacing: 0.01em;
+}
+
+/* ---------- LINKS ROW (sobre) ---------- */
+
+.soma-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 0;
+}
+
+.soma-pill {
+  font-family: var(--subtitle-font);
+  font-size: 15px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  background: rgba(255, 255, 255, 0.55);
+  color: rgba(0, 0, 0, 0.8);
+  transition: background 180ms var(--ease), border-color 180ms var(--ease),
+    transform 180ms var(--ease);
+}
+
+.soma-pill:hover {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.32);
+  transform: translateY(-1px);
+}
+
+/* ---------- QUOTE ---------- */
+
+.soma-quote {
+  margin: 48px 0 0;
+  padding: 28px clamp(20px, 3vw, 40px);
+  border-left: 2px solid rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 0 12px 12px 0;
+}
+
+.soma-quote p {
+  margin: 0 0 12px;
+  font-family: var(--subtitle-font);
+  font-size: clamp(18px, 1.9vw, 26px);
+  line-height: 1.45;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.soma-quote footer {
+  font-family: var(--body-font);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- IDENTIDAD ---------- */
+
+.soma-brand-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: 16px;
+}
+
+.soma-brand-item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.soma-brand-media {
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  background: #eeeae3;
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.soma-brand-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 16px;
+}
+
+.soma-brand-item--palette .soma-brand-media img,
+.soma-brand-item--type .soma-brand-media img {
+  object-fit: cover;
+  padding: 0;
+}
+
+.soma-brand-item figcaption {
+  font-family: var(--body-font);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+@media (max-width: 720px) {
+  .soma-brand-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- APP — phones row ---------- */
+
+.soma-phones-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.2vw, 32px);
+  margin-top: 24px;
+}
+
+.soma-phones-row .soma-phone:nth-child(n + 4) {
+  display: grid;
+}
+
+.soma-phone {
+  margin: 0;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #e8e4dd;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+}
+
+.soma-phone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 980px) {
+  .soma-phones-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .soma-phones-row {
+    grid-template-columns: 1fr;
+  }
+  .soma-phone {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+/* ---------- MÉTRICAS ---------- */
+
+.soma-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: 24px;
+}
+
+.soma-metric {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.soma-metric-media {
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  background: #eeeae3;
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.06);
+}
+
+.soma-metric-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.soma-metric--wide {
+  grid-column: 1 / -1;
+}
+
+.soma-metric--wide .soma-metric-media {
+  aspect-ratio: 16 / 7;
+}
+
+.soma-metric figcaption {
+  font-family: var(--body-font);
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.62);
+}
+
+.soma-metric figcaption strong {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+@media (max-width: 720px) {
+  .soma-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- WEB ---------- */
+
+.soma-web-hero {
+  margin: 24px 0 20px;
+  width: 100vw;
+  max-width: 100%;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  aspect-ratio: 16 / 9;
+  background: #eeeae3;
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  overflow: hidden;
+}
+
+.soma-web-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.soma-web-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.soma-web-grid figure {
+  margin: 0;
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  background: #eeeae3;
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+}
+
+.soma-web-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .soma-web-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- SOCIAL — IG grid ---------- */
+
+.soma-ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 18px);
+  margin-top: 24px;
+}
+
+.soma-ig-grid figure {
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  background: #eeeae3;
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+}
+
+.soma-ig-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .soma-ig-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- ROL ---------- */
+
+.soma-roles-section {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 60px;
+}
+
+.soma-roles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: 16px;
+}
+
+.soma-role h3 {
+  margin: 0 0 14px;
+  font-family: var(--subtitle-font);
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.soma-role ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.soma-role li {
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.soma-role li:last-child {
+  border-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .soma-roles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- INLINE LINK ---------- */
+
+.soma-inline-link {
+  color: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.soma-inline-link:hover {
+  text-decoration: none;
+  border-bottom-color: rgba(0, 0, 0, 0.7);
+}
+
+/* ---------- PLACEHOLDER IMG ---------- *
+   Para que los <img> sin archivo se vean como cajas neutras (no como el
+   icono roto del browser), ocultamos el alt y el borde del ícono.
+   El contenedor ya tiene background + aspect-ratio, así que queda prolijo. */
+.soma-page img {
+  color: transparent;
+  font-size: 0;
+}
