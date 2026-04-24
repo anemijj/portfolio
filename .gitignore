@@ -50,3 +50,5 @@ materia/**/*.exr
 # (releases.githubusercontent.com no sirve CORS headers → WebGL no puede
 # usarlos como textura). Deben estar bajo 100 MB.
 !materia/vr-1.mov
+# Loop liviano del render del anillo (~770KB) usado en soma.html.
+!materia/rosegold.mp4
