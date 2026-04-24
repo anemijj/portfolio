@@ -45,3 +45,8 @@ materia/**/*.mov
 materia/**/*.mp4
 materia/**/*.bip
 materia/**/*.exr
+
+# Excepciones: videos same-origin necesarios para visores WebGL
+# (releases.githubusercontent.com no sirve CORS headers → WebGL no puede
+# usarlos como textura). Deben estar bajo 100 MB.
+!materia/vr-1.mov

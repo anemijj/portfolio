@@ -14,6 +14,7 @@
     />
 
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="entorno-inmersivo.css" />
   </head>
   <body data-page="entorno-inmersivo">
     <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -36,20 +37,81 @@
 
     <main id="main" class="project-page">
       <div class="case case--vr360">
-        
-        <div class="figma-embed" aria-label="Preview YouTube 360">
-          <iframe
-            src="https://www.youtube.com/embed/otYV-RaQyyU?rel=0&modestbranding=1"
-            title="Entorno inmersivo 360"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
+        <p class="vr360-hint">
+          Video 360° equirectangular. Arrastrá para mirar en cualquier dirección.
+          Usá la rueda del mouse o las flechas del teclado para ajustar el zoom.
+        </p>
+
+        <!-- Video fuente: la esfera WebGL toma la textura de acá. Queda oculto
+             fuera del flujo visible. -->
+        <video
+          id="vr360Video"
+          class="vr360-video-src"
+          loop
+          playsinline
+          muted
+          preload="auto"
+          aria-hidden="true"
+        ></video>
+
+        <div
+          id="vr360Root"
+          class="vr360-root"
+          role="application"
+          aria-label="Visor 360°. Arrastrá para mirar alrededor."
+        >
+          <!-- Fallback: si WebGL no está disponible o el video 360 no
+               arranca, se muestra el video plano adentro del mismo marco. -->
+          <video
+            id="vr360Fallback"
+            class="vr360-fallback-video"
+            loop
+            playsinline
+            muted
+            preload="metadata"
+            controls
+            hidden
+          ></video>
+
+          <div class="vr360-ui">
+            <p class="vr360-ui-help" id="vr360Help" hidden>
+              Arrastrá para explorar
+            </p>
+            <div class="vr360-ui-controls">
+              <button
+                class="vr360-ui-btn"
+                id="vr360Reset"
+                type="button"
+                aria-label="Volver a la vista inicial"
+              >
+                Reset vista
+              </button>
+              <button
+                class="vr360-ui-btn"
+                id="vr360Mute"
+                type="button"
+                aria-pressed="false"
+                aria-label="Activar sonido"
+              >
+                Sonido: OFF
+              </button>
+            </div>
+          </div>
+
+          <button
+            class="vr360-play-overlay"
+            id="vr360PlayOverlay"
+            type="button"
+            hidden
+          >
+            Tocá para reproducir
+          </button>
         </div>
-        
       </div>
     </main>
 
+    <script src="vendor/three.min.js" defer></script>
     <script src="script.js" defer></script>
+    <script src="entorno-inmersivo.js" defer></script>
   </body>
 </html>

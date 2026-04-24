@@ -1,0 +1,37 @@
+/* Entorno inmersivo — complementos visuales sobre los estilos base
+   .vr360-* definidos en styles.css. Acá van las piezas específicas que
+   tienen que ver con interacción (cursor de drag, fade del hint, etc.). */
+
+.vr360-root {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.vr360-root.is-dragging {
+  cursor: grabbing;
+}
+
+.vr360-root canvas {
+  cursor: inherit;
+}
+
+.vr360-ui-help {
+  transition: opacity 0.35s ease;
+}
+
+.vr360-ui-help.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Botón de sonido con ancho estable para que no salte entre ON/OFF. */
+#vr360Mute {
+  min-width: 110px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+#vr360Reset {
+  text-align: center;
+}
