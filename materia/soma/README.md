@@ -1,53 +1,60 @@
 # Assets — SOMA case study
 
-La página `soma.html` referencia los archivos de esta carpeta.
-Dropeá los PNG/JPG con **exactamente** estos nombres (minúsculas, sin
-espacios) y los slots los muestran automáticamente. No hace falta tocar
-código.
-
-Si algún archivo todavía no existe, la página igual se ve prolija: cada
-slot reserva su caja con fondo neutro y aspecto correcto.
-
-## Hero
-
-- `hero.png` — foto del anillo (formato vertical 4:5, alta calidad).
-
-## Identidad
-
-- `logo.png` — logotipo Soma sobre fondo claro (ideal PNG con alpha).
-- `paleta.png` — paleta cromática (cover 4:3).
-- `tipografia.png` — sistema tipográfico (cover 4:3).
+La página `soma.html` consume archivos de esta carpeta y de `materia/`.
+Estado actual:
 
 ## App (pantallas del producto)
 
-- `app-01.png` — pantalla principal "today"
-- `app-02.png` — pantalla de sueño
-- `app-03.png` — pantalla de balance
-- `app-04.png` — pantalla de actividad
-- `app-05.png` — pantalla de salud de la mujer
-- `app-06.png` — detalle de métrica
+JPGs verticales que ya estás usando (en `materia/soma/`):
 
-Formato: mockup vertical tipo iPhone, ratio ~9:19.5 (pantalla sola o con
-device frame, como prefieras).
+- `inicio alta.jpg`
+- `actividad alta.jpg`
+- `balance baja.jpg`
+- `sueño alta.jpg`
+- `detalle act.jpg`
+- `ciclo.jpg`
 
-## Métricas (visualizaciones de datos)
+## Métricas
 
-- `metric-01.png` — Glance · indicadores al vistazo (rings, barras) — 4:3
-- `metric-02.png` — Focus · métrica enfocada (HRV vs baseline) — 4:3
-- `metric-03.png` — Explore · vista exploratoria a largo plazo — 16:7 (wide)
+- `general.jpg`
+- `hr.jpg`
+- `detalle2.jpg`
 
 ## Web (`soma.pe`)
 
-- `web-01.png` — captura del home, formato paisaje — 16:9 (ocupa full-bleed)
-- `web-02.png` — sección experiencia — 16:10
-- `web-03.png` — sección testimonios — 16:10
+Videos comprimidos a 1280px H.264 (sin audio):
+
+- `materia/hero-web.mp4` (~1.5 MB) — original `hero web.mov`.
+- `materia/soma/websoma-1.mp4` (~4.9 MB) — original `websoma-1.mov`.
+
+> Los `.mov` originales quedan en disco pero ignorados por git
+> (ver `.gitignore`). Si querés re-comprimir con otra calidad:
+>
+> ```bash
+> ffmpeg -i input.mov -movflags +faststart -pix_fmt yuv420p \
+>   -vf "scale=1280:-2:flags=lanczos" -c:v libx264 -crf 24 \
+>   -preset slow -an output.mp4
+> ```
+>
+> Subí `crf` (24 → 28) si querés archivos más chicos.
+
+## Render del anillo
+
+- `materia/rosegold.mp4` (~770 KB) — loop usado en la sección "sobre".
 
 ## Social (Instagram @livewithsoma)
 
-- `ig-01.png` a `ig-06.png` — seis piezas cuadradas (1080×1080) para el
-  grid de 3 columnas.
+Ya **no** se usan imágenes locales. La sección renderiza los embeds
+oficiales de Instagram (iframes a `instagram.com/p/{ID}/embed/`).
 
----
+Para que aparezcan posts: editá `soma.html` y pegá los permalinks en la
+constante `SOMA_IG_POSTS` (al final del archivo). Mientras esté vacía,
+la sección muestra un placeholder con link al perfil.
 
-**Tip**: si querés usar JPG en lugar de PNG para las capturas más pesadas
-(web, IG), avisame y cambio las extensiones en el HTML.
+```js
+const SOMA_IG_POSTS = [
+  "https://www.instagram.com/p/ABCdEf123/",
+  "https://www.instagram.com/reel/XYZ789/",
+  // ...
+];
+```

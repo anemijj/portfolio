@@ -52,3 +52,6 @@ materia/**/*.exr
 !materia/vr-1.mov
 # Loop liviano del render del anillo (~770KB) usado en soma.html.
 !materia/rosegold.mp4
+# Videos de la web institucional de Soma (comprimidos a 1280px h264).
+!materia/hero-web.mp4
+!materia/soma/websoma-1.mp4

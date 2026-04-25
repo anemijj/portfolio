@@ -321,34 +321,69 @@
   }
 }
 
-/* ---------- SOCIAL — IG grid ---------- */
+/* ---------- SOCIAL — IG grid (embeds oficiales) ----------
+   Cada celda es un <iframe> apuntando a https://www.instagram.com/p/{ID}/embed/
+   El alto se setea con aspect-ratio para que el header + imagen del post
+   entren bien (footer se recorta en algunos posts largos, está OK). */
 
 .soma-ig-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(10px, 1.4vw, 18px);
+  gap: clamp(12px, 1.6vw, 22px);
   margin-top: 24px;
 }
 
-.soma-ig-grid figure {
+.soma-ig-cell {
   margin: 0;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 5 / 7;
   border-radius: 10px;
-  background: #eeeae3;
   border: 1px solid var(--card-border);
+  background: #ffffff;
   overflow: hidden;
 }
 
-.soma-ig-grid img {
+.soma-ig-cell iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border: 0;
   display: block;
 }
 
-@media (max-width: 720px) {
+.soma-ig-grid--empty {
+  grid-template-columns: 1fr;
+  border: 1px dashed rgba(0, 0, 0, 0.18);
+  border-radius: 12px;
+  padding: 32px clamp(16px, 3vw, 32px);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.soma-ig-empty {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.66);
+  text-align: center;
+}
+
+.soma-ig-empty a {
+  color: rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 980px) {
   .soma-ig-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .soma-ig-grid {
+    grid-template-columns: 1fr;
+  }
+  .soma-ig-cell {
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
   }
 }
 
