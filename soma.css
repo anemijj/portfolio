@@ -38,12 +38,14 @@
 }
 
 .soma-page .soma-two-col p {
+  margin-top: 0px;
   font-size: clamp(14px, 1.1vw, 16px);
   line-height: 1.85;
   color: rgba(0, 0, 0, 0.78);
 }
 
 .soma-page .soma-two-col .soma-lead {
+  margin-top: 0px;
   font-family: var(--subtitle-font);
   font-size: clamp(22px, 2.6vw, 34px);
   line-height: 1.35;
@@ -150,17 +152,49 @@
   margin: 0;
   aspect-ratio: 9 / 19.5;
   border-radius: 32px;
-  overflow: hidden;
+  /* Scroll vertical interno: la captura entra alineada arriba y si es más
+     alta que la ventana del 'phone', el usuario puede scrollear para ver
+     el resto. Mantenemos el fade-out abajo como pista visual de que hay más. */
+  overflow-y: auto;
+  overflow-x: hidden;
   background: #e8e4dd;
   border: 1px solid var(--card-border);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 92%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+          mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 92%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+.soma-phone::-webkit-scrollbar {
+  width: 6px;
+}
+
+.soma-phone::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+}
+
+.soma-phone::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .soma-phone img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
+  /* Sin object-fit: la imagen toma su altura natural y desborda el
+     contenedor, generando el scroll. */
 }
 
 @media (max-width: 980px) {
@@ -363,43 +397,9 @@
   }
 }
 
-/* ---------- ANILLO (render flotando, en col 2 de 'sobre') ----------
-   Loop MP4 del anillo girando + flote vertical suave por CSS. */
 
-.soma-ring-stage {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  margin: 0;
-  display: grid;
-  place-items: center;
-  animation: somaRingFloat 6s ease-in-out infinite;
-}
 
-.soma-ring-media {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: transparent;
-  /* Drop-shadow proyectada bajo el anillo (calca su silueta si el video
-     tiene fondo transparente; igual queda bien sobre fondo plano). */
-  filter: drop-shadow(0 22px 26px rgba(42, 36, 27, 0.2));
-}
 
-@keyframes somaRingFloat {
-  0%,
-  100% {
-    transform: translateY(-6px);
-  }
-  50% {
-    transform: translateY(6px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .soma-ring-stage {
-    animation: none;
-  }
-}
 
 /* Texto del rol corto (IBM Mono) que va debajo del two-col en 'sobre'. */
 .soma-sobre-rol {
