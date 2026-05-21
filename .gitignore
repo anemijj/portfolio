@@ -43,6 +43,7 @@ next-env.d.ts
 # media pesada
 materia/**/*.mov
 materia/**/*.mp4
+materia/**/*.gif
 materia/**/*.bip
 materia/**/*.exr
 
@@ -55,3 +56,6 @@ materia/**/*.exr
 # Videos de la web institucional de Soma (comprimidos a 1280px h264).
 !materia/hero-web.mp4
 !materia/soma/websoma-1.mp4
+# Videos del manifold (random.html), carpeta materia/?web/.
+!materia/?web/3-1.mp4
+!materia/?web/gorrito.mp4

@@ -1,0 +1,309 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #e6e6e6;
+  color: #111;
+  font-family: "IBM Plex Mono", monospace;
+  /* anula el padding-top del header fijo definido en styles.css
+     porque el hero ocupa toda la pantalla y el header flota encima */
+  padding-top: 0;
+}
+
+/* ---------- Secciones del scroll largo (sobre-mi + random + contacto) ----------
+   Cada section[id] del scroll largo deja margen de anclaje para que el
+   header fijo no tape el contenido al hacer scroll a #sobre-mi/#random/#contacto. */
+.long-section {
+  scroll-margin-top: var(--sticky-header-offset, 76px);
+}
+
+/* La seccion random embebida ocupa una pantalla completa.
+   El manifold se posiciona absoluto dentro para fillear el viewport
+   y que los tiles del cluster no se corten arriba o abajo. */
+.long-section.manifold-main {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  background: #f5f5f0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.long-section.manifold-main .manifold {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.long-section.manifold-main .manifold-scene,
+.long-section.manifold-main .manifold-stage {
+  width: 100%;
+  height: 100%;
+}
+
+.about-page {
+  width: 100%;
+  margin: 0;
+  padding: 0 0 84px;
+}
+
+/* ---------- HERO NOMBRE + FOTO ---------- */
+.name-hero {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
+  padding: 10vh 12vw 12vh;
+  column-gap: clamp(38px, 5vw, 74px);
+  margin: 0;
+}
+
+.name-hero-left,
+.name-hero-right {
+  font-family: "Arial Narrow", "Arial", sans-serif;
+  font-size: clamp(62px, 6.2vw, 88px);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+}
+
+.name-hero-left {
+  justify-self: end;
+  align-self: start;
+  margin-top: 8vh;
+}
+
+.name-hero-right {
+  justify-self: start;
+  align-self: end;
+  margin-bottom: 10vh;
+}
+
+.name-hero img {
+  width: clamp(176px, 16vw, 240px);
+  height: clamp(230px, 20vw, 320px);
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- TITULO + META ---------- */
+.about-kicker {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  column-gap: 24px;
+  align-items: end;
+  margin: 0 auto 46px;
+  width: min(1180px, 92vw);
+}
+
+.about-kicker h1 {
+  margin: 0;
+  font-family: "Arial Narrow", "Arial", sans-serif;
+  font-size: 74px;
+  font-weight: 400;
+  line-height: 0.86;
+  letter-spacing: -0.018em;
+  white-space: nowrap;
+}
+
+.about-meta {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ---------- GRID INFERIOR ---------- */
+.info-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.98fr) minmax(0, 0.86fr);
+  grid-template-areas:
+    "about experience skills"
+    "education experience languages";
+  column-gap: 42px;
+  row-gap: 18px;
+  align-items: start;
+  width: min(1180px, 92vw);
+  margin: 0 auto;
+}
+
+.info-block {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.info-block h2 {
+  margin: 0 0 10px;
+  font-family: "VT323", monospace;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.info-block p {
+  margin: 0;
+}
+
+.info-block--about {
+  grid-area: about;
+}
+
+.info-block--about p + p {
+  margin-top: 10px;
+}
+
+.info-block--experience {
+  grid-area: experience;
+}
+
+.info-block--skills {
+  grid-area: skills;
+}
+
+.info-block--education {
+  grid-area: education;
+}
+
+.info-block--languages {
+  grid-area: languages;
+}
+
+.exp-group {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.exp-label {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.68);
+}
+
+.exp-items article {
+  margin-bottom: 16px;
+}
+
+.exp-items h3,
+.edu-item h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.exp-items p,
+.edu-item p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.edu-item {
+  margin-bottom: 16px;
+}
+
+/* ---------- EMBED RANDOM ---------- */
+.about-random {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: 100px;
+  background: var(--bg, #e6e6e6);
+}
+
+.about-random-frame {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  border: 0;
+  background: var(--bg, #e6e6e6);
+}
+
+@media (max-width: 1200px) {
+  .about-page {
+    padding-bottom: 56px;
+  }
+
+  .info-grid {
+    column-gap: 32px;
+  }
+}
+
+@media (max-width: 700px) {
+  .name-hero {
+    grid-template-columns: 1fr;
+    row-gap: 18px;
+    justify-items: center;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 8vh 8vw 10vh;
+  }
+
+  .name-hero-left,
+  .name-hero-right {
+    font-size: clamp(48px, 12vw, 68px);
+    text-align: center;
+    align-self: auto;
+    justify-self: center;
+    margin: 0;
+  }
+
+  .about-kicker {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+    width: min(1180px, 92vw);
+    margin: 0 auto 30px;
+  }
+
+  .about-kicker h1 {
+    font-size: clamp(64px, 14vw, 84px);
+  }
+
+  .about-meta {
+    margin-bottom: 0;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "about experience"
+      "education skills"
+      "languages .";
+    width: min(1180px, 92vw);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "about"
+      "experience"
+      "skills"
+      "education"
+      "languages";
+    row-gap: 20px;
+  }
+
+  .exp-group {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

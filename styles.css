@@ -275,6 +275,24 @@ a:hover {
   outline-offset: 3px;
 }
 
+/* Variante "?" cuando vive dentro del nav (al lado de contacto / sobre mi).
+   Recuadro 0.5pt negro con padding interno para destacar el botón sin
+   competir con los links de texto a su derecha. */
+.help-btn--nav {
+  font-size: 22px;
+  align-self: center;
+  border: 0.5pt solid rgba(0, 0, 0, 0.95);
+  border-radius: 4px;
+  padding: 2px 8px;
+  line-height: 1;
+}
+
+.help-btn--nav:hover {
+  /* Mantenemos el lift suave de .help-btn:hover y agregamos un fondo
+     muy tenue para que el recuadro responda al hover sin perder peso. */
+  background: rgba(0, 0, 0, 0.04);
+}
+
 .header-jump {
   display: flex;
   flex-wrap: wrap;
@@ -1351,5 +1369,265 @@ body[data-page="project"] .map--fullbleed .caption {
   .pdf-spread--double .revista-page-img {
     max-width: 50%;
     width: 50%;
+  }
+}
+
+/* =============================================================
+   MANIFOLD — escena 3D para random.html
+   Estructura tipo "cuartos recorribles" estilo manifold.art:
+   los tiles se ubican en posiciones FIJAS y solo rotan en
+   múltiplos de 45° en Y. La escena entera rota con el mouse
+   (parallax) — los tiles individualmente NO se mueven ni cambian
+   de tamaño. Sin sombras, sin bordes, sin efectos extra.
+   Las posiciones (x, y, z, ry) y dimensiones (w, h) las inyecta
+   JS como CSS custom properties por tile.
+   ============================================================= */
+
+.manifold-main {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.manifold {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 120px);
+  height: calc(100svh - 120px);
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.manifold-scene {
+  width: 100%;
+  height: 100%;
+  /* Perspective grande para minimizar el fish-eye con el layout ancho:
+     los cuartos de los bordes no se distorsionan demasiado. */
+  perspective: 1700px;
+  perspective-origin: 50% 50%;
+}
+
+.manifold-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--scene-rx, 0deg)) rotateY(var(--scene-ry, 0deg));
+  will-change: transform;
+}
+
+.manifold-tile {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  width: var(--tile-w, 220px);
+  height: var(--tile-h, 280px);
+  /* Orden: primero rotamos en X (para los pisos/techos que son
+     planos horizontales), después en Y (apertura de paredes). */
+  transform:
+    translate3d(-50%, -50%, 0)
+    translate3d(var(--tile-x, 0), var(--tile-y, 0), var(--tile-z, 0))
+    rotateY(var(--tile-ry, 0deg))
+    rotateX(var(--tile-rx, 0deg));
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  /* Backface oculta: al pasar de 90° de rotación Y (o con pisos a
+     -90° en X vistos desde abajo) no queremos ver el reverso espejado. */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+a.manifold-tile,
+button.manifold-tile {
+  cursor: pointer;
+}
+
+button.manifold-tile {
+  border: 0;
+  padding: 0;
+  font: inherit;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.manifold-tile img,
+.manifold-tile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Hover mínimo: indicador sutil de que el tile es navegable.
+   Sin translateZ ni scale: la posición en el espacio queda fija. */
+a.manifold-tile:hover img,
+a.manifold-tile:hover video,
+a.manifold-tile:focus-visible img,
+a.manifold-tile:focus-visible video {
+  opacity: 0.78;
+  transition: opacity 200ms ease;
+}
+
+a.manifold-tile:focus-visible {
+  outline: 1px solid rgba(0, 0, 0, 0.6);
+  outline-offset: 2px;
+}
+
+.manifold-caption {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: var(--mono-font);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  text-align: center;
+  width: max-content;
+  max-width: 90vw;
+}
+
+@media (max-width: 720px) {
+  .manifold {
+    height: calc(100vh - 110px);
+    height: calc(100svh - 110px);
+    min-height: 460px;
+  }
+}
+
+/* =============================================================
+   MANIFOLD LIGHTBOX — modal para ver carruseles (ccp, reviews, ...)
+   Overlay full-screen, navegación con prev/next + flechas + Esc.
+   Estética alineada al resto del manifold: blanco/negro plano,
+   sin sombras ni efectos.
+   ============================================================= */
+.manifold-lock {
+  overflow: hidden;
+}
+
+.manifold-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(245, 245, 240, 0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 56px 64px;
+}
+
+.manifold-lightbox[hidden] {
+  display: none;
+}
+
+.manifold-lightbox .ml-stage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.manifold-lightbox .ml-stage img,
+.manifold-lightbox .ml-stage video {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.manifold-lightbox .ml-close,
+.manifold-lightbox .ml-nav {
+  position: absolute;
+  background: transparent;
+  border: 0.5pt solid rgba(0, 0, 0, 0.85);
+  color: rgba(0, 0, 0, 0.85);
+  font-family: var(--mono-font);
+  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 150ms ease;
+}
+
+.manifold-lightbox .ml-close:hover,
+.manifold-lightbox .ml-nav:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.manifold-lightbox .ml-close {
+  top: 16px;
+  right: 16px;
+  font-size: 24px;
+}
+
+.manifold-lightbox .ml-nav {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 26px;
+}
+
+.manifold-lightbox .ml-prev {
+  left: 16px;
+}
+
+.manifold-lightbox .ml-next {
+  right: 16px;
+}
+
+.manifold-lightbox .ml-meta {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  font-family: var(--mono-font);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(0, 0, 0, 0.7);
+  white-space: nowrap;
+}
+
+.manifold-lightbox .ml-title {
+  font-style: italic;
+}
+
+.manifold-lightbox .ml-counter {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 720px) {
+  .manifold-lightbox {
+    padding: 56px 8px 56px;
+  }
+  .manifold-lightbox .ml-close,
+  .manifold-lightbox .ml-nav {
+    width: 34px;
+    height: 34px;
+  }
+  .manifold-lightbox .ml-prev {
+    left: 8px;
+  }
+  .manifold-lightbox .ml-next {
+    right: 8px;
   }
 }
